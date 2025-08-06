@@ -903,14 +903,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script><script src="inventory.js"></script>
-<script>
-  fetch('blog.html')
-    .then(response => response.text())
-    .then(data => {
-      const blogEl = document.getElementById('blogContent');
-      if (blogEl) blogEl.textContent = data;
-    });
-</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -922,27 +914,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return response.text();
     })
     .then(data => {
-      document.getElementById('blogContent').textContent = data;
-    })
-    .catch(error => {
-      document.getElementById('blogContent').textContent = "Unable to load blog content.";
-      console.error(error);
-    });
-});
-</script>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  fetch('blog.html')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Failed to load blog content");
-      }
-      return response.text();
-    })
-    .then(data => {
-      document.getElementById('blogContent').textContent = data;
+      document.getElementById('blogContent').innerHTML = data;
     })
     .catch(error => {
       console.error('Error loading blog content:', error);
