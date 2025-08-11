@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+
+<html lang="en" style="">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Your one-stop destination in Venice, FL for pavers, stucco, aggregates, and cement supplies." name="description"/>
+<title>White Cement Specialties</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    * { box-sizing: border-box; }
+    body, html {
+      margin: 0; padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f4f7fc;
+      min-height: 100%;
+      overflow: auto;
+    }
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: #0045a2;
+      color: white;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      z-index: 1000;
+    }
+    .logo { height: 60px; }
+    .search-bar {
+      flex-grow: 1; margin: 0 1.5rem; max-width: 400px;
+      display: flex;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 0.5rem;
+      border-radius: 0 0 0 6px;
+      border: none;
+    }
+    .search-bar button {
+      background: white;
+      border: none;
+      padding: 0 12px;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+    }
+    .search-bar button img {
+      height: 20px;
+    }
+    nav ul {
+      list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0;
+    }
+    nav a {
+      text-decoration: none; color: white; font-weight: bold; position: relative;
+    }
+    nav a.active::after, nav a:hover::after {
+      content: ''; position: absolute; width: 100%; height: 2px; background: white; bottom: -4px; left: 0;
+    }
+  </style>
+<style>
+  .product-card:hover,
+  .stucco-card:hover,
+  .gallery-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+    transform: translateY(-5px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+</style>
+<style>
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem;
+    }
+    .logo {
+      height: 50px;
+    }
+    .search-bar {
+      width: 100%;
+      max-width: 100%;
+      margin: 1rem 0;
+    }
+    nav ul {
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    nav ul li a {
+      font-size: 1rem;
+    }
+    #content-wrapper > section {
+      height: auto !important;
+      min-height: calc(100vh - 200px);
+    }
+    section#home div[style*="position: relative"] {
+      width: 100% !important;
+      height: auto !important;
+    }
+    section#home iframe {
+      height: 200px !important;
+    }
+    .gallery-grid {
+      grid-template-columns: repeat(1, 1fr) !important;
+    }
+    .product-card {
+      width: 100% !important;
+      margin: 0 auto;
+    }
+    #contact section,
+    #about section,
+    #products section,
+    #blog section {
+      padding: 1rem !important;
+    }
+    form#contactForm {
+      flex-direction: column !important;
+    }
+    form#contactForm > div {
+      width: 100% !important;
+      padding-left: 0 !important;
+    }
+    #contact div[style*="flex: 1"] {
+      padding-left: 0 !important;
+      max-width: 100% !important;
+    }
+  }
+</style>
+<style>
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+  }
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+    nav ul {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background-color: #0045a2;
+    }
+    nav ul.active {
+      display: flex;
+    }
+  }
+</style>
+<style id="site-inline-css">
+/* ---- Layout & Typography ---- */
+:root { --brand:#0045a2; --muted:#666; --card-bg:#fff; --shadow:0 2px 10px rgba(0,0,0,.08); }
+.section-center { display:flex; justify-content:center; align-items:center; }
+.maxw-900 { max-width:900px; margin:0 auto; }
+.text-center { text-align:center; }
+
+/* ---- Tri-Circle Pavers Grid ---- */
+#tri-circle-products .grid-auto {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+#tri-circle-products .product-card {
+  position:relative; background:var(--card-bg); border-radius:12px; box-shadow:var(--shadow);
+  overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; height:400px;
+}
+#tri-circle-products .product-card img {
+  width:100%; height:180px; object-fit:cover; margin:0; display:block;
+}
+#tri-circle-products .product-card h3, 
+#tri-circle-products .product-card h4 { color:var(--brand); margin:0; font-size:1.05rem; }
+#tri-circle-products .product-card .body { padding:1rem; }
+
+/* ---- Stock Badges (rendered by inventory.js on each card) ---- */
+.stock-badge { position:absolute; top:8px; left:8px; padding:4px 8px; font-size:12px; font-weight:700; border-radius:3px; color:#fff; z-index:2; }
+.stock-in { background:#2e7d32; }
+.stock-low { background:#ef6c00; }
+.stock-out { background:#c62828; }
+
+/* ---- Stock Legend ---- */
+#tri-circle-products .stock-legend { display:flex; gap:12px; align-items:center; justify-content:center; margin: 0.5rem 0 1rem; font-size:0.95rem; }
+#tri-circle-products .stock-legend .item { display:inline-flex; align-items:center; gap:6px; }
+#tri-circle-products .stock-legend .dot { width:12px; height:12px; display:inline-block; border-radius:2px; }
+#tri-circle-products .stock-legend .dot.in { background:#2e7d32; }
+#tri-circle-products .stock-legend .dot.low { background:#ef6c00; }
+#tri-circle-products .stock-legend .dot.out { background:#c62828; }
+
+/* ---- About Section Centering ---- */
+#about { padding: 1rem 0; }
+#about .about-card { margin:0 auto; max-width:900px; text-align:center; }
+
+/* ---- Contact Section Layout ---- */
+#contact .contact-wrapper {
+  display:flex; gap:2rem; max-width:1100px; width:100%; margin:0 auto; align-items:flex-start;
+}
+#contact form { flex:1; }
+#contact .contact-info { flex:0 0 300px; padding-left:0.5rem; font-size:1rem; max-width:320px; }
+</style>
+<style>
+/* Step 11: Mobile nav refinement for very small screens */
+@media (max-width: 480px) {
+  header { padding: 0.5rem 1rem; }
+  .logo { height: 40px; }
+  .search-bar { max-width: 280px; margin: 0 0.5rem; }
+  .search-bar input { font-size: 0.9rem; padding: 0.5rem; }
+  .search-bar button img { height: 16px; }
+  nav ul { gap: 0.5rem; }
+  nav ul li a { font-size: 0.9rem; }
+}
+</style>
+
+<style>
+/* Step 13: Mobile nav + search tweaks */
+.hamburger { display: none; } /* default hidden on desktop */
+@media (max-width: 768px) {
+  .hamburger { display: block; cursor: pointer; }
+  nav ul { display: none; }                 /* closed by default on mobile */
+  header.nav-open nav ul { display: flex; } /* open state */
+}
+@media (max-width: 480px) {
+  .search-bar { max-width: 220px !important; margin: 0 0.5rem !important; }
+  .search-bar input { font-size: 0.9rem; padding: 0.45rem; }
+}
+</style>
+
+<style>
+/* Step 14: Single-line header on very small screens */
+@media (max-width: 480px) {
+  header {
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+  .logo { height: 36px !important; }
+  .search-bar {
+    flex: 1 1 auto;
+    min-width: 0;            /* allow shrinking */
+    max-width: none !important;
+    margin: 0;               /* no extra margins */
+    display: flex;
+  }
+  .search-bar input {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+  .search-bar button { padding: 0 8px; }
+  .search-bar button img { height: 14px; }
+  .hamburger { display: block; margin-left: 0.25rem; }
+  nav { width: 100%; }
+  nav ul { display: none; } /* keep hidden until toggled */
+  header.nav-open nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+  }
+}
+</style>
+</head>
+<body style="">
+<header>
+<a href="#home" onclick="showSection('home')"><img alt="Logo" class="logo" src="https://i.imgur.com/Ck9mkEG.png"/></a>
+<form class="search-bar" id="searchForm">
+<input id="searchInput" placeholder="Search..." type="text"/>
+<button type="submit">
+<img alt="Search" src="https://img.icons8.com/ios-filled/50/search--v1.png"/>
+</button>
+</form>
+<div class="hamburger">
+<div></div>
+<div></div>
+<div></div>
+</div>
+<nav>
+<ul>
+<li><a href="#home" onclick="showSection('home')">Home</a></li>
+<li><a href="#products" onclick="showProducts()">Products</a></li>
+<li><a href="#gallery" onclick="showSection('gallery')">Gallery</a></li>
+<li><a href="#about" onclick="showSection('about')">About Us</a></li>
+<li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+<li><a href="#blog" onclick="showSection('blog')">Blog</a></li>
+</ul>
+</nav>
+</header>
+<div id="content-wrapper" style="position: relative; top: 100px;">
+<section id="home" style="display: flex; justify-content: center; align-items: center; height: calc(100vh - 10px);"><div style="display: flex; justify-content: center; align-items: top; height: calc(100vh - 10px); padding-top: 10px;"><div style="position: relative; height: 100%; width: calc((100vh - 100px) * (16 / 9)); max-width: 100%; overflow: hidden;"><iframe allow="autoplay; encrypted-media" allowfullscreen="True" frameborder="0" src="https://www.youtube.com/embed/SfryQ66c-B8?autoplay=1&amp;loop=1&amp;playlist=SfryQ66c-B8&amp;mute=1&amp;controls=0&amp;modestbranding=1&amp;showinfo=0&amp;rel=0" style="width: 100%; height: 100%; border: none;"></iframe><div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)); color: white; display: flex; align-items: center; justify-content: center; text-align: center;"><h1 style="font-size: 2.5rem; max-width: 80%;">Your Gulf Coast Supplier for Pavers, Stucco, and Cement</h1></div></div></div></section>
+<section id="products" style="display: none; height: calc(100vh - 200px); overflow-y: auto; padding: 2rem; justify-content: center; align-items: center; flex-direction: column; justify-content: center; align-items: center; flex-direction: column;">
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;">
+<div class="product-card" style="width: 250px; background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"><a href="#tri-circle-products" onclick="showTriCircleProducts()" style="display: block; text-decoration: none; color: inherit;">
+<img alt="Pavers" src="https://i.imgur.com/qe36sWY.jpg" style="width: 100%; border-radius: 0;"/>
+<h3 onclick="showTriCircleProducts()" style="margin: 10px 0; color: #0045a2; cursor:pointer;">Tri Circle Pavers</h3>
+<p onclick="showTriCircleProducts()" style="cursor:pointer;">Click to view our in-stock selection of premium pavers.</p>
+</a></div>
+<div class="product-card" style="width: 250px; background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"><a href="#stucco-products" onclick="showStuccoProducts()" style="display: block; text-decoration: none; color: inherit;">
+<img alt="Stucco Supplies" src="https://i.imgur.com/hdDLA02.jpg" style="width: 100%; border-radius: 0;"/>
+<h3 style="margin: 10px 0; color: #0045a2;">Stucco Supplies</h3>
+<p>High-quality stucco materials for professional finishes.</p>
+</a></div>
+<div class="product-card" style="width: 250px; background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+<img alt="Aggregates &amp; Decorative Stone" src="https://i.imgur.com/Dm8dLCV.jpg" style="width: 100%; border-radius: 0;"/>
+<h3 style="margin: 10px 0; color: #0045a2;">Aggregates &amp; Decorative Stone</h3>
+<p>Various grades of sand, gravel, and crushed stone for every job.</p>
+</div>
+<div class="product-card" style="width: 250px; background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+<img alt="Furniture &amp; Decor" src="https://i.imgur.com/atlDmVz.jpg" style="width: 100%; border-radius: 0;"/>
+<h3 style="margin: 10px 0; color: #0045a2;">Furniture &amp; Decor</h3>
+<p>Custom-manufactured cement furniture and decorative elements built in-house.</p>
+</div>
+</div>
+</section>
+<section id="gallery" style="display: none; height: calc(100vh - 200px); overflow-y: auto; padding: 2rem; justify-content: center; align-items: center; flex-direction: column; justify-content: center; align-items: center; flex-direction: column;">
+<style>
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .gallery-item-title {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 69, 162, 0.8);
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      padding: 0.5rem;
+    }
+  </style>
+<div class="gallery-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+<div class="gallery-item">
+<img alt="Rising Star" src="https://imgur.com/DDxe1Am.jpg"/>
+<div class="gallery-item-title">Rising Star</div>
+</div>
+<div class="gallery-item">
+<img alt="B&amp;C Pavers" src="https://imgur.com/AtKOW9m.jpg"/>
+<div class="gallery-item-title">B&amp;C Pavers</div>
+</div>
+<div class="gallery-item">
+<img alt="Summer Pavers" src="https://imgur.com/52foYBd.jpg"/>
+<div class="gallery-item-title">Summer Pavers</div>
+</div>
+<div class="gallery-item">
+<img alt="JS Brick" src="https://imgur.com/0ImhGZc.jpg"/>
+<div class="gallery-item-title">JS Brick</div>
+</div>
+<div class="gallery-item">
+<img alt="Champion Pavers" src="https://imgur.com/ZDA5BoI.jpg"/>
+<div class="gallery-item-title">Champion Pavers</div>
+</div>
+<div class="gallery-item">
+<img alt="Custom Pavers" src="https://imgur.com/s6jzf6j.jpg"/>
+<div class="gallery-item-title">Custom Pavers</div>
+</div>
+</div>
+</section>
+<script>
+  function showLightbox(src) {
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+    overlay.onclick = () => document.body.removeChild(overlay);
+    const img = document.createElement('img');
+    img.src = src;
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+  }
+</script>
+<style>
+  .lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  .lightbox-overlay img {
+    max-width: 90vw; max-height: 90vh;
+    border-radius: 0;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+</style>
+<section id="about" style="text-align: center">
+<div class="product-card about-card" style="margin: 0 auto; max-width: 900px">
+<h2 style="color: #0045a2; margin-bottom: 1rem;">About Us</h2>
+<p style="font-size: 0.95rem; line-height: 1.6; color: #333;">
+<strong>White Cement Specialties</strong> is a locally operated, veteran-owned supplier proudly serving the Venice, Florida community and the greater Gulf Coast for over 40 years. We specialize in providing high-quality pavers, sealers, stucco materials, decorative concrete, and landscape supplies—available in both bulk and bagged options. As a trusted manufacturer of specialty concrete products, we offer everything from custom benches and stepping stones to masonry mixes and hardscape essentials. Known for our hands-on customer service, fast delivery, and competitive pricing, we are committed to supporting projects of all sizes—whether you're enhancing a backyard patio or managing a large-scale build. Our mission is to deliver reliable, personalized solutions with the professionalism and expertise our community has come to expect.
+      </p>
+<p style="font-size: 0.95rem; line-height: 1.6; color: #333;">
+        Driven by our vision to be the Gulf Coast’s most trusted partner in outdoor building solutions, we combine expert guidance, fast delivery, and competitive pricing to help bring your projects to life—whether you're enhancing a backyard or building a community.
+      </p>
+</div>
+</section>
+<section id="contact"><div class="contact-wrapper" style="margin: 0 auto; max-width: 1000px"><form action="https://formsubmit.co/travissmith84@gmail.com" id="contactForm" method="POST"><input name="_captcha" type="hidden" value="false"/><div style="display:flex; flex-direction:column; gap:1rem; flex:1;">
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-papNMf0xU1cQ1zvDIfAklHt4YypU7XnBBbyYl1m+u4RVLUU+l0lAHM8kILDrCF3FdyeXlB3wlE2nT5SQaG9how==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<style>
+    #contactForm input::placeholder,
+    #contactForm textarea::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+    #contactForm select:focus,
+    #contactForm input:focus,
+    #contactForm textarea:focus {
+      outline: none;
+      border-color: #0045a2;
+      box-shadow: 0 0 0 2px rgba(0, 69, 162, 0.2);
+    }
+    #contactForm input[type="text"],
+    #contactForm textarea,
+    #contactForm select {
+      transition: all 0.2s ease;
+    }
+    #contactForm label {
+      font-size: 0.85rem;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
+    #contactForm button:hover {
+      background-color: #003a8c;
+      cursor: pointer;
+    }
+  </style>
+<h3 style="text-align: center; margin: 0 0 1rem; font-size: 1.5rem; color: #0045a2;">Request a Quote</h3>
+<div class="form-section" id="quoteFields">
+<label for="customerType" style="font-weight: 600; font-size: 0.95rem;">Customer Type</label>
+<select id="customerType" name="customerType" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 0;">
+<option value="homeowner">Homeowner / Residential</option>
+<option value="business">Business / Commercial</option>
+</select>
+<div id="homeownerFields">
+<div style="position: relative;">
+<i class="fas fa-user" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="name" placeholder="Full Name*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i class="fas fa-map-marker-alt" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="address" placeholder="Street Address*" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i class="fas fa-phone" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="phone" placeholder="Phone Number*" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i class="fas fa-envelope" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="email" placeholder="Email Address*" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="email"/>
+</div>
+</div>
+<div id="businessFields" style="display: none;">
+<div style="position: relative;">
+<i class="fas fa-building" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="business" placeholder="Business Name*" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i class="fas fa-map-marker-alt" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="biz_address" placeholder="Business Address*" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i class="fas fa-phone" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="biz_phone" placeholder="Phone Number*" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i class="fas fa-id-card" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="ein" placeholder="EIN*" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i class="fas fa-envelope" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="biz_email" placeholder="Email Address*" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="email"/>
+</div>
+</div>
+<textarea name="materials" placeholder="Materials Requested (quantity/type)*" rows="6" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; resize: vertical; height: 250px; width: 100%; height: 250px;"></textarea><button style="background: #0045a2; color: white; padding: 0.75rem; font-weight: bold; font-size: 1rem; border: none; border-radius: 0;" type="submit">Submit</button>
+</div>
+<script>
+  const customerTypeSelect = document.getElementById('customerType');
+  const homeownerFields = document.getElementById('homeownerFields');
+  const businessFields = document.getElementById('businessFields');
+  customerTypeSelect.addEventListener('change', function () {
+    if (this.value === 'homeowner') {
+      homeownerFields.style.display = 'block';
+      businessFields.style.display = 'none';
+    } else {
+      homeownerFields.style.display = 'none';
+      businessFields.style.display = 'block';
+    }
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    customerTypeSelect.dispatchEvent(new Event('change'));
+  });
+</script>
+<div class="confirmation-message" id="confirmation" style="display:none; text-align:center; color:green; font-weight:bold;">Thank you! We will be in touch soon.</div>
+</div></form><div class="contact-info">
+<h3 style="color: #0045a2;">Contact Information</h3>
+<p style="margin: 0.5rem 0;"><strong>Address:</strong><br/>202 Seaboard Ave<br/>Venice, FL 34285</p>
+<p style="margin: 0.5rem 0;"><strong>Phone:</strong><br/><a href="tel:+19414882172" style="color: #0045a2; text-decoration: none;">(941) 488-2172</a></p>
+<p style="margin: 0.5rem 0;"><strong>Email:</strong><br/><a href="mailto:orders@whitecement.net" style="color: #0045a2; text-decoration: none;">orders@whitecement.net</a></p>
+</div></div><div style="display:flex; gap:2rem; max-width:1100px; width:100%; margin:0 auto; align-items:flex-start;"></div>
+</section></div>
+<section id="tri-circle-products" style="display: none; position: relative; height: calc(100vh - 100px); overflow-y: auto; padding: 2rem; background-color: #f9f9f9;">
+<h2 style="text-align: center; color: #0045a2; margin-bottom: 2rem;">Tri Circle Pavers - In Stock</h2>
+<div class="stock-legend"><span class="item"><span class="dot in"></span>In Stock</span><span class="item"><span class="dot low"></span>Low Stock</span><span class="item"><span class="dot out"></span>Out of Stock</span></div><div class="grid-auto">
+<div class="product-card" id="euro-2pc-chestnut-buff-charcoal">
+<img alt="Chestnut Buff Charcoal" src="https://imgur.com/5O32adf.jpg"/><img alt="Euro 2PC - Chestnut Buff Charcoal" src="https://imgur.com/wQ00tee.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Chestnut Buff Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-creme-pecan-chocolate">
+<img alt="Creme Pecan Chocolate" src="https://imgur.com/lBlPa4c.jpg"/><img alt="Euro 2PC - Creme Pecan Chocolate" src="https://imgur.com/wQ00tee.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Creme Pecan Chocolate</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-malt-pecan-charcoal">
+<img alt="Malt Pecan Charcoal" src="https://imgur.com/9eYtd3d.jpg"/><img alt="Euro 2PC - Malt Pecan Charcoal" src="https://imgur.com/wQ00tee.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Malt Pecan Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-red-yellow-charcoal">
+<img alt="Red Yellow Charcoal" src="https://imgur.com/b4x8umm.jpg"/><img alt="Euro 2PC - Red Yellow Charcoal" src="https://imgur.com/wQ00tee.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Red Yellow Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-vanilla-pecan-charcoal">
+<img alt="Vanilla Pecan Charcoal" src="https://imgur.com/bbD8nqe.jpg"/><img alt="Euro 2PC - Vanilla Pecan Charcoal" src="https://imgur.com/wQ00tee.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Vanilla Pecan Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-white-charcoal">
+<img alt="White Charcoal" src="https://imgur.com/Z994jAs.jpg"/><img alt="Euro 2PC - White Charcoal" src="https://imgur.com/wQ00tee.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" src="https://imgur.com/f5AykSR.jpg"/><img alt="Euro 2PC - White Coconut Charcoal" src="https://imgur.com/wQ00tee.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" src="https://imgur.com/YurpR0C.jpg"/><img alt="Euro 2PC - White Vanilla Coconut" src="https://imgur.com/wQ00tee.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="apollo-white-charcoal">
+<img alt="White Charcoal" src="https://imgur.com/Z994jAs.jpg"/><img alt="Apollo - White Charcoal" src="https://imgur.com/Ie19FZH.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Apollo - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="apollo-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" src="https://imgur.com/f5AykSR.jpg"/><img alt="Apollo - White Coconut Charcoal" src="https://imgur.com/Ie19FZH.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Apollo - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="apollo-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" src="https://imgur.com/YurpR0C.jpg"/><img alt="Apollo - White Vanilla Coconut" src="https://imgur.com/Ie19FZH.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Apollo - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="mega-smooth-white-charcoal">
+<img alt="White Charcoal" src="https://imgur.com/Z994jAs.jpg"/><img alt="Mega Smooth - White Charcoal" src="https://imgur.com/etgpuf5.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Smooth - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="mega-smooth-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" src="https://imgur.com/f5AykSR.jpg"/><img alt="Mega Smooth - White Coconut Charcoal" src="https://imgur.com/etgpuf5.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Smooth - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="mega-smooth-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" src="https://imgur.com/YurpR0C.jpg"/><img alt="Mega Smooth - White Vanilla Coconut" src="https://imgur.com/etgpuf5.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Smooth - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="mega-stone-white-charcoal">
+<img alt="White Charcoal" src="https://imgur.com/Z994jAs.jpg"/><img alt="Mega Stone - White Charcoal" src="https://imgur.com/a5WnRqJ.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Stone - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="mega-stone-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" src="https://imgur.com/f5AykSR.jpg"/><img alt="Mega Stone - White Coconut Charcoal" src="https://imgur.com/a5WnRqJ.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Stone - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="mega-stone-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" src="https://imgur.com/YurpR0C.jpg"/><img alt="Mega Stone - White Vanilla Coconut" src="https://imgur.com/a5WnRqJ.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Stone - White Vanilla Coconut</h3>
+</div>
+<div class="product-card" id="4x8-white-charcoal">
+<img alt="White Charcoal" src="https://imgur.com/Z994jAs.jpg"/><img alt="4x8 - White Charcoal" src="https://imgur.com/QDqYsze.jpg"/>
+<div style="padding: 1rem;">
+<h3 style="color: #0045a2;">4x8 - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="4x8-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" src="https://imgur.com/f5AykSR.jpg"/><img alt="4x8 - White Coconut Charcoal" src="https://imgur.com/QDqYsze.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">4x8 - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="4x8-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" src="https://imgur.com/YurpR0C.jpg"/><img alt="4x8 - White Vanilla Coconut" src="https://imgur.com/QDqYsze.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">4x8 - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="bullnose-coping-white-charcoal">
+<img alt="White Charcoal" src="https://imgur.com/Z994jAs.jpg"/><img alt="Bullnose Coping - White Charcoal" src="https://imgur.com/IUejPJG.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Bullnose Coping - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="bullnose-coping-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" src="https://imgur.com/f5AykSR.jpg"/><img alt="Bullnose Coping - White Coconut Charcoal" src="https://imgur.com/IUejPJG.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Bullnose Coping - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="bullnose-coping-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" src="https://imgur.com/YurpR0C.jpg"/><img alt="Bullnose Coping - White Vanilla Coconut" src="https://imgur.com/IUejPJG.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Bullnose Coping - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-1-white-charcoal">
+<img alt="White Charcoal" src="https://imgur.com/Z994jAs.jpg"/><img alt="Remodel Coping 1&quot; src="https://imgur.com/vQC455j.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 1" - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-2.5-white-charcoal">
+<img alt="White Charcoal" src="https://imgur.com/Z994jAs.jpg"/><img alt="Remodel Coping 2.5&quot; src="https://imgur.com/4nzAPES.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 2.5" - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-2.5-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" src="https://imgur.com/f5AykSR.jpg"/><img alt="Remodel Coping 2.5&quot; src="https://imgur.com/4nzAPES.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 2.5" - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-2.5-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" src="https://imgur.com/YurpR0C.jpg"/><img alt="Remodel Coping 2.5&quot; src="https://imgur.com/4nzAPES.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 2.5" - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-4-white-charcoal">
+<img alt="White Charcoal" src="https://imgur.com/Z994jAs.jpg"/><img alt="Remodel Coping 4&quot; src="https://imgur.com/iYTqY6s.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 4" - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-4-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" src="https://imgur.com/f5AykSR.jpg"/><img alt="Remodel Coping 4&quot; src="https://imgur.com/iYTqY6s.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 4" - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-4-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" src="https://imgur.com/YurpR0C.jpg"/><img alt="Remodel Coping 4&quot; src="https://imgur.com/iYTqY6s.jpg"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 4" - White Vanilla Coconut</h3>
+</div>
+</div>
+</div>
+<div class="product-card" id="4x8-white-charcoal-2"><img src="https://imgur.com/Z994jAs.jpg"/><img src="https://imgur.com/QDqYsze.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">4x8 - White Charcoal</h3></div></div><div class="product-card" id="4x8-white-coconut-charcoal-2"><img src="https://imgur.com/f5AykSR.jpg"/><img src="https://imgur.com/QDqYsze.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">4x8 - White Coconut Charcoal</h3></div></div><div class="product-card" id="4x8-white-vanilla-coconut-2"><img src="https://imgur.com/YurpR0C.jpg"/><img src="https://imgur.com/QDqYsze.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">4x8 - White Vanilla Coconut</h3></div></div><div class="product-card" id="bullnose-coping-white-charcoal-2"><img src="https://imgur.com/Z994jAs.jpg"/><img src="https://imgur.com/IUejPJG.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Bullnose Coping - White Charcoal</h3></div></div><div class="product-card" id="bullnose-coping-white-coconut-charcoal-2"><img src="https://imgur.com/f5AykSR.jpg"/><img src="https://imgur.com/IUejPJG.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Bullnose Coping - White Coconut Charcoal</h3></div></div><div class="product-card" id="bullnose-coping-white-vanilla-coconut-2"><img src="https://imgur.com/YurpR0C.jpg"/><img src="https://imgur.com/IUejPJG.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Bullnose Coping - White Vanilla Coconut</h3></div></div><div class="product-card" id="remodel-coping-1-white-charcoal-2"><img src="https://imgur.com/Z994jAs.jpg"/><img src="https://imgur.com/vQC455j.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 1" - White Charcoal</h3></div></div><div class="product-card" id="remodel-coping-2.5-white-charcoal-2"><img src="https://imgur.com/Z994jAs.jpg"/><img src="https://imgur.com/4nzAPES.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 2.5" - White Charcoal</h3></div></div><div class="product-card" id="remodel-coping-2.5-white-coconut-charcoal-2"><img src="https://imgur.com/f5AykSR.jpg"/><img src="https://imgur.com/4nzAPES.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 2.5" - White Coconut Charcoal</h3></div></div><div class="product-card" id="remodel-coping-2.5-white-vanilla-coconut-2"><img src="https://imgur.com/YurpR0C.jpg"/><img src="https://imgur.com/4nzAPES.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 2.5" - White Vanilla Coconut</h3></div></div><div class="product-card" id="remodel-coping-4-white-charcoal-2"><img src="https://imgur.com/Z994jAs.jpg"/><img src="https://imgur.com/iYTqY6s.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 4" - White Charcoal</h3></div></div><div class="product-card" id="remodel-coping-4-white-coconut-charcoal-2"><img src="https://imgur.com/f5AykSR.jpg"/><img src="https://imgur.com/iYTqY6s.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 4" - White Coconut Charcoal</h3></div></div><div class="product-card" id="remodel-coping-4-white-vanilla-coconut-2"><img src="https://imgur.com/YurpR0C.jpg"/><img src="https://imgur.com/iYTqY6s.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 4" - White Vanilla Coconut</h3></div></div><div class="product-card" id="4x8-charcoal"><img src="https://imgur.com/xb3TWyb.jpg"/><img src="https://imgur.com/QDqYsze.jpg"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">4x8 - Charcoal</h3></div></div></div></section>
+<section id="stucco-products" style="display: none; height: calc(100vh - 200px); overflow-y: auto; overflow-y: auto; padding: 2rem; background-color: #f9f9f9;">
+<h2 style="text-align: center; color: #0045a2; margin-bottom: 2rem;">Stucco Products - In Stock</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="16X5 Scratcher Trowel" src="https://i.imgur.com/po9K9gH.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">16X5 Scratcher Trowel</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="2.5 SF (DIMPLE) TILATH 27”X97”" src="https://i.imgur.com/kFP8Rzp.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">2.5 SF (DIMPLE) TILATH 27”X97”</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="3/8&quot; src="https://i.imgur.com/Mr8XZcl.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">3/8" CONC STUBS 9GAX3/8" RED "S"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="4&quot; src="https://i.imgur.com/6DHE8k9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">4" STUCCO MESH TAPE</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="4 MIL CLEAR POLYFILM 10' X 100' (VISQUINE)" src="https://i.imgur.com/mbczAFi.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">4 MIL CLEAR POLYFILM 10' X 100' (VISQUINE)</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="50 LB CASE 3/8&quot; src="https://i.imgur.com/yNyk0a5.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">50 LB CASE 3/8" STUB NAILS</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="60 MIN (15 LB) FELT ROLL" src="https://i.imgur.com/p2hGz1U.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">60 MIN (15 LB) FELT ROLL</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="60 MIN (30 LB) FELT ROLL" src="https://i.imgur.com/IUbRJbH.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">60 MIN (30 LB) FELT ROLL</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="9.5&quot; src="https://i.imgur.com/jwusjQk.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">9.5" STUCCO MESH TAPE</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CASING BEAD - 1&quot; src="https://i.imgur.com/TZxCmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CASING BEAD - 1-1/4&quot; src="https://i.imgur.com/TZxCmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1-1/4"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CASING BEAD - 1-1/2&quot; src="https://i.imgur.com/TZxCmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1-1/2"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CASING BEAD - 1/4&quot; src="https://i.imgur.com/TZxCmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1/4"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CASING BEAD - 1/2&quot; src="https://i.imgur.com/TZxCmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1/2"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CASING BEAD - 2&quot; src="https://i.imgur.com/TZxCmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 2"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CASING BEAD - 3/4&quot; src="https://i.imgur.com/TZxCmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 3/4"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CASING BEAD - 3/8&quot; src="https://i.imgur.com/TZxCmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 3/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CASING BEAD - 5/8&quot; src="https://i.imgur.com/TZxCmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 5/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CONTROL JOINT (M TYPE) - 1/2&quot; src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 1/2"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CONTROL JOINT (M TYPE) - 3/4&quot; src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 3/4"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CONTROL JOINT (M TYPE) - 3/8&quot; src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 3/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CONTROL JOINT (M TYPE) - 5/8&quot; src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 5/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CONTROL JOINT (M TYPE) - 7/8&quot; src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 7/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CORNER BEAD 2.5X2.5&quot; src="https://i.imgur.com/0j8ORyL.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CORNER BEAD 2.5X2.5</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CORNER BEAD WIDE FLANGE" src="https://i.imgur.com/0j8ORyL.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CORNER BEAD WIDE FLANGE</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="FOUNDATION WEEP SCREED - 3/4&quot; src="https://i.imgur.com/F5yoTEW.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">FOUNDATION WEEP SCREED - 3/4"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="FOUNDATION WEEP SCREED - 7/8&quot; src="https://i.imgur.com/F5yoTEW.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">FOUNDATION WEEP SCREED - 7/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="GREEN PLASTIC FOAM FLOAT (9.5&quot; src="https://i.imgur.com/KbLYF9P.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">GREEN PLASTIC FOAM FLOAT (9.5" X 4" X 3/4")</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="LINK - LANCO BONDING AGENT (1GAL)" src="https://i.imgur.com/VXjFKZC.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">LINK - LANCO BONDING AGENT (1GAL)</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="LINK - LANCO BONDING AGENT (5GAL)" src="https://i.imgur.com/VXjFKZC.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">LINK - LANCO BONDING AGENT (5GAL)</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="MID-WALL WEEP SCREED - 1/2&quot; src="https://i.imgur.com/F5yoTEW.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">MID-WALL WEEP SCREED - 1/2"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="MID-WALL WEEP SCREED - 5/8&quot; src="https://i.imgur.com/F5yoTEW.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">MID-WALL WEEP SCREED - 5/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="QUICKRETE PREMIX STUCCO BASE COAT MIX 80LB 42 BAGS/PALLET" src="https://i.imgur.com/sOKN9nx.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">QUICKRETE PREMIX STUCCO BASE COAT MIX 80LB 42 BAGS/PALLET</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="REPLACEMENT MAGNETIC HEAD FOR TP02085 MAGNETIC HAMMER" src="https://i.imgur.com/BvmUl5E.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">REPLACEMENT MAGNETIC HEAD FOR TP02085 MAGNETIC HAMMER</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="RED STUCCO TAPE 2&quot; src="https://i.imgur.com/H8F4nzo.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">RED STUCCO TAPE 2"X60YD</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="ROOF - WALL WEEP SCREED 5/8&quot; src="https://i.imgur.com/F5yoTEW.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">ROOF - WALL WEEP SCREED 5/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="SOLID WIDE-FLANGE CASING BEAD (WEEP SCREED) 7/8&quot; src="https://i.imgur.com/F5yoTEW.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">SOLID WIDE-FLANGE CASING BEAD (WEEP SCREED) 7/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="STRETCH WRAP 18&quot; src="https://i.imgur.com/MNKEmAg.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">STRETCH WRAP 18"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="STRAIGHT CUT AVIATION SNIPS W/YELLOW HANDLE" src="https://i.imgur.com/kAPkmNn.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">STRAIGHT CUT AVIATION SNIPS W/YELLOW HANDLE</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="SUPER MIXER" src="https://i.imgur.com/QYXjAq5.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">SUPER MIXER</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="TITAN STUCCO CEMENT BAGGED 80LB" src="https://i.imgur.com/Ra4YXxU.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">TITAN STUCCO CEMENT BAGGED 80LB</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="TN58HC 5/8&quot; src="https://i.imgur.com/yNyk0a5.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">TN58HC 5/8"X0.97 @ 10M T-NAILS HARDWIRE</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="VISQUINE 1.5MIL CLEAR POLYFILM 8'4&quot; src="https://i.imgur.com/mbczAFi.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">VISQUINE 1.5MIL CLEAR POLYFILM 8'4" X 200'</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="WINDOW GUARD 21&quot; src="https://i.imgur.com/VaL32Fv.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">WINDOW GUARD 21" X 600' (BLUE)</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="1&quot; src="https://i.imgur.com/rM6BuWT.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">1" X 1-1/2" LEG STAPLES</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="1/2&quot; src="https://i.imgur.com/Mr8XZcl.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">1/2" CONC STUBS 9GAX3/8"</h3>
+</div>
+<div class="product-card" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="3/4&quot; src="https://i.imgur.com/Mr8XZcl.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">3/4" CONC STUBS 9GAX3/8"</h3>
+</div>
+</div>
+</section>
+<section id="scrolling-reviews" style="position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #ccc; padding: 1rem 0; box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 998;">
+<div class="review-button-container" style="text-align: center; margin-bottom: 0.5rem;">
+<a href="https://search.google.com/local/writereview?placeid=ChIJ7YRjkbFbw4gR_VKbdUrt9Sc" style="padding: 10px 20px; background: #0045a2; color: white; font-weight: bold; border-radius: 0; text-decoration: none;" target="_blank">Leave a Review</a>
+</div>
+<div class="review-track" style="display: flex; gap: 1rem; animation: scroll 40s linear infinite; width: max-content; padding: 0 1rem;">
+<div class="review" style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“Outstanding customer service and a beautiful selection of materials!”</div>
+<div class="review" style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“They made the whole process so easy from start to finish.”</div>
+<div class="review" style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“Highly recommend White Cement for any hardscape needs.”</div>
+<div class="review" style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“Great prices and on-time delivery. Five stars!”</div>
+<div class="review" style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“Knowledgeable staff helped me choose the perfect pavers.”</div>
+</div>
+</section>
+<section id="blog" style="display: none; height: calc(100vh - 200px); overflow-y: auto; padding: 2rem;">
+<div class="product-card" style="max-width: 800px; background: white; padding: 2rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: auto;">
+<h2 style="color: #0045a2; margin-bottom: 1rem;">Company Blog</h2>
+<div id="blogContent" style="white-space: pre-wrap; font-size: 0.95rem; color: #333; line-height: 1.6;"></div>
+</div>
+</section>
+<style>
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
+<!-- Lightbox Popup Start -->
+<div id="customLightbox" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.75); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+<div onclick="hideLightbox()" style="cursor: pointer;">
+<img alt="New Product Announcement" src="https://i.imgur.com/OlREV7p.png" style="max-width: 70vw; max-height: 70vh; border-radius: 0; box-shadow: 0 0 20px rgba(255,255,255,0.5);"/>
+</div>
+</div>
+<script>
+  function hideLightbox() {
+    const lb = document.getElementById('customLightbox');
+    if (lb) lb.remove();
+    localStorage.setItem('lightboxShown', 'true');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!localStorage.getItem('lightboxShown')) {
+      document.body.insertAdjacentHTML('beforeend', document.getElementById('customLightbox').outerHTML);
+    }
+  });
+</script>
+<!-- Lightbox Popup End -->
+<!-- Orphaned script commented out for stability: <script>
+);
+  document.getElementById('stucco-products').style.display = 'block';
+}
+</script> --><!-- Orphaned script commented out for stability: <script>
+);
+  document.getElementById('tri-circle-products').style.display = 'block';
+}
+</script> --><!-- Orphaned script commented out for stability: <script>
+);
+  document.getElementById('products').style.display = 'flex';
+}
+</script> --><script>
+
+
+  document.querySelectorAll('nav a').forEach(link => {
+    link.classList.remove('active');
+  });
+  const activeLink = document.querySelector(`nav a[href='#${id}']`);
+  if (activeLink) {
+    activeLink.classList.add('active');
+  }
+}
+</script>
+<script>
+  function hideAllSections() {
+    const sections = document.querySelectorAll('#content-wrapper > section');
+    sections.forEach(section => {
+      section.style.display = 'none';
+      section.classList.remove('active');
+    });
+  }
+
+  
+  }
+
+  
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    hideAllSections();
+    const home = document.getElementById('home');
+    if (home) home.style.display = 'flex';
+  });
+</script>
+<script src="inventory.js"></script>
+<!-- Chat Character with Clickable Behavior -->
+<style>
+  #chat-seahorse {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 225px;
+    height: auto;
+    cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    #chat-seahorse {
+      width: 80px;
+      bottom: 10px;
+      right: 10px;
+    }
+  }
+  #chat-form {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    z-index: 9999;
+    background: white;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    width: 280px;
+    border-radius: 6px;
+  }
+  #chat-form textarea {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 0.5rem;
+  }
+  #chat-form button {
+    background: #0045a2;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+  }
+</style>
+<img alt="Chat Character" id="chat-seahorse" onclick="toggleChatForm()" src="seahorse-chat.png"/>
+<div id="chat-form">
+<label for="chatMessage">Send us a message:</label>
+<textarea id="chatMessage" placeholder="Type your message..."></textarea>
+<button onclick="submitChatMessage()">Send</button>
+</div>
+<script>
+  function toggleChatForm() {
+    const form = document.getElementById('chat-form');
+    form.style.display = form.style.display === 'block' ? 'none' : 'block';
+  }
+  function submitChatMessage() {
+    const message = document.getElementById('chatMessage').value.trim();
+    if (message) {
+      alert('Message submitted: ' + message);
+      document.getElementById('chatMessage').value = '';
+      document.getElementById('chat-form').style.display = 'none';
+    } else {
+      alert('Please enter a message.');
+    }
+  }
+</script>
+<script>
+// Consolidated navigation/show-hide logic
+(function() {
+  const SECTION_IDS = [
+    'home','products','gallery','about','contact','blog',
+    'tri-circle-products','stucco-products'
+  ];
+
+  function hideAll() {
+    SECTION_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  }
+
+  function show(id) {
+    hideAll();
+    const el = document.getElementById(id);
+    if (el) {
+      // If a section depends on flex/grid, keep its inline style consistent
+      const isFlexy = el.style.justifyContent || el.style.alignItems || el.style.flexDirection;
+      el.style.display = isFlexy ? 'flex' : 'block';
+      // Scroll to top of content wrapper for better UX
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    // Update active nav item if present
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    const link = document.querySelector(`nav a[href="#${id}"]`);
+    if (link) link.classList.add('active');
+  }
+
+  // Public API
+  window.showSection = function(id) { show(id); };
+  window.showProducts = function() { show('products'); };
+  window.showTriCircleProducts = function() { show('tri-circle-products'); };
+  window.showStuccoProducts = function() { show('stucco-products'); };
+
+  // Ensure Home is visible on first paint if nothing else is shown
+  document.addEventListener('DOMContentLoaded', function() {
+    const anyVisible = SECTION_IDS.some(id => {
+      const el = document.getElementById(id);
+      return el && el.style.display !== 'none' && el.offsetParent !== null;
+    });
+    if (!anyVisible) show('home');
+  });
+})();
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var header = document.querySelector('header');
+  var hamburger = document.querySelector('.hamburger');
+  var navLinks = document.querySelectorAll('nav a');
+
+  function isMobile() { return window.matchMedia('(max-width: 768px)').matches; }
+
+  if (hamburger && header) {
+    hamburger.addEventListener('click', function () {
+      var open = header.classList.toggle('nav-open');
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  navLinks.forEach(function(a) {
+    a.addEventListener('click', function () {
+      if (isMobile() && header) {
+        header.classList.remove('nav-open');
+        if (hamburger) { hamburger.setAttribute('aria-expanded', 'false'); }
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
