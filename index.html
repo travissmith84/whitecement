@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+
+<!--
+  WCS master v2025-08-12 15:06 EDT | Do not edit older copies
+  Changelog:
+  - Streamlined mobile nav: single close handler, no duplicate bindings, links close menu (2025-08-12 15:27 EDT).
+  - Rolled back image URL normalization after report of pavers image issues; restored prior working URLs (2025-08-12 15:21 EDT).
+    Note: Avoid changing image ID casing; treat Imgur IDs as case-sensitive.
+  - Removed redundant gallery/lightbox binding script to prevent double event handlers (2025-08-12 15:18 EDT).
+  - Added JS to dedupe duplicate inventory stock badges safely (keeps first badge per card) (2025-08-12 15:14 EDT).
+  - Rolled back attempted structural fix to pavers cards; restoring prior markup (v2025-08-12 15:12 EDT).
+  - Reverted aggressive deduplication: no elements with ids ending in '-2' are removed.
+  - Restored/kept Blog section container and lazy-loader script for blog.html.
+  - Fixed malformed <img> alt attributes swallowing 'src=' tokens (cleaned 41 tags).
+  - Corrected CSS: rgba(0,0,0,08) -> rgba(0,0,0,.08); search input border-radius adjusted.
+  - Removed only truly empty inline <script> tags (removed 0).
+
+--><html lang="en" style=""><head><link href="https://fonts.gstatic.com" rel="dns-prefetch"/><link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com" rel="dns-prefetch"/><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Your one-stop destination in Venice, FL for pavers, stucco, aggregates, and cement supplies." name="description"/>
+<title>White Cement Specialties</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<style>*{box-sizing: border-box;}body, html{margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background-color: #f4f7fc; min-height: 100%; overflow: auto;}header{position: fixed; top: 0; left: 0; right: 0; background: #0045a2; color: white; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; z-index: 1000;}.logo{height: 60px;}.search-bar{flex-grow: 1; margin: 0 1.5rem; max-width: 400px; display: flex;}.search-bar input{flex: 1; padding: 0.5rem; border-radius: 6px 0 0 6px; border: none;}.search-bar button{background: white; border: none; padding: 0 12px; border-radius: 0 6px 6px 0; cursor: pointer;}.search-bar button img{height: 20px;}nav ul{list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0;}nav a{text-decoration: none; color: white; font-weight: bold; position: relative;}nav a.active::after, nav a:hover::after{content: ''; position: absolute; width: 100%; height: 2px; background: white; bottom: -4px; left: 0;}
+  </style>
+<style>.product-card:hover, .stucco-card:hover, .gallery-item:hover{box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important; transform: translateY(-5px); transition: box-shadow 0.3s ease, transform 0.3s ease;}</style>
+<style>@media (max-width: 768px){header {
+      flex-direction: column; align-items: flex-start; padding: 1rem;}.logo{height: 50px;}.search-bar{width: 100%; max-width: 100%; margin: 1rem 0;}nav ul{flex-direction: column; gap: 0.75rem; width: 100%;}nav ul li a{font-size: 1rem;}#content-wrapper > section{height: auto !important; min-height: calc(100vh - 200px);}section#home div[style*="position: relative"]{width: 100% !important; height: auto !important;}section#home iframe{height: 200px !important;}.gallery-grid{grid-template-columns: repeat(1, 1fr) !important;}.product-card{width: 100% !important; margin: 0 auto;}#contact section, #about section, #products section, #blog section{padding: 1rem !important;}form#contactForm{flex-direction: column !important;}form#contactForm > div{width: 100% !important; padding-left: 0 !important;}#contact div[style*="flex: 1"]{padding-left: 0 !important; max-width: 100% !important;}
+  }</style>
+<style>.hamburger{display: none; flex-direction: column; cursor: pointer;}.hamburger div{width: 25px; height: 3px; background-color: white; margin: 4px 0;}@media (max-width: 768px){.hamburger {
+      display: flex;}nav ul{display: none; flex-direction: column; width: 100%; background-color: #0045a2;}nav ul.active{display: flex;}
+  }</style>
+<style id="site-inline-css">/* ---- Layout & Typography ---- */ :root{--brand: #0045a2; --muted: #666; --card-bg: #fff; --shadow: 0 2px 10px rgba(0,0,0,.08);}.section-center{display: flex; justify-content: center; align-items: center;}.maxw-900{max-width: 900px; margin: 0 auto;}.text-center{text-align: center;}/* ---- Tri-Circle Pavers Grid ---- */ #tri-circle-products .grid-auto{display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;}#tri-circle-products .product-card{position: relative; background: var(--card-bg); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; height: 400px;}#tri-circle-products .product-card img{width: 100%; height: 180px; object-fit: cover; margin: 0; display: block;}#tri-circle-products .product-card h3, #tri-circle-products .product-card h4{color: var(--brand); margin: 0; font-size: 1.05rem;}#tri-circle-products .product-card .body{padding: 1rem;}/* ---- Stock Badges (rendered by inventory.js on each card) ---- */ .stock-badge{position: absolute; top: 8px; left: 8px; padding: 4px 8px; font-size: 12px; font-weight: 700; border-radius: 3px; color: #fff; z-index: 2;}.stock-in{background: #2e7d32;}.stock-low{background: #ef6c00;}.stock-out{background: #c62828;}/* ---- Stock Legend ---- */ #tri-circle-products .stock-legend{display: flex; gap: 12px; align-items: center; justify-content: center; margin: 0.5rem 0 1rem; font-size: 0.95rem;}#tri-circle-products .stock-legend .item{display: inline-flex; align-items: center; gap: 6px;}#tri-circle-products .stock-legend .dot{width: 12px; height: 12px; display: inline-block; border-radius: 2px;}#tri-circle-products .stock-legend .dot.in{background: #2e7d32;}#tri-circle-products .stock-legend .dot.low{background: #ef6c00;}#tri-circle-products .stock-legend .dot.out{background: #c62828;}/* ---- About Section Centering ---- */ #about{padding: 1rem 0;}#about .about-card{margin: 0 auto; max-width: 900px; text-align: center;}/* ---- Contact Section Layout ---- */ #contact .contact-wrapper{display: flex; gap: 2rem; max-width: 1100px; width: 100%; margin: 0 auto; align-items: flex-start;}#contact form{flex: 1;}#contact .contact-info{flex: 0 0 300px; padding-left: 0.5rem; font-size: 1rem; max-width: 320px;}</style>
+<style id="accessible-hamburger-css">.hamburger{display: none; align-items: center; justify-content: center; gap: 4px; cursor: pointer; background: transparent; border: none; padding: 8px; line-height: 1;}.hamburger .bar{display: block; width: 24px; height: 3px; background-color: #fff;}.hamburger:focus-visible{outline: 2px solid #fff; outline-offset: 2px;}@media (max-width: 768px){.hamburger { display: inline-flex;}} nav a:focus-visible{outline: 2px solid #fff; outline-offset: 3px; border-radius: 2px;}</style>
+<style id="wcs-utilities">/* Utility classes to replace inline styles */ .section-pad{padding: 2rem;}.section-scroll{height: calc(100vh - 200px); overflow-y: auto;}.fullvh-minus-10{height: calc(100vh - 10px);}.center-flex{display: flex; justify-content: center; align-items: center;}.flex-col{display: flex; flex-direction: column;}.flex-wrap-center{display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;}.container-md{margin: 0 auto; max-width: 1000px; width: 100%;}.text-center{text-align: center;}/* Gallery grid base (media queries already adjust columns elsewhere) */ .gallery-grid{display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;}</style>
+<style id="wcs-responsive">/* Consolidated responsive rules from Steps 11–15 (order preserved) */ /* Step 11: Mobile nav refinement for very small screens */ @media (max-width: 480px){header { padding: 0.5rem 1rem;}.logo{height: 40px;}.search-bar{max-width: 280px; margin: 0 0.5rem;}.search-bar input{font-size: 0.9rem; padding: 0.5rem;}.search-bar button img{height: 16px;}nav ul{gap: 0.5rem;}nav ul li a{font-size: 0.9rem;}} /* Step 13: Mobile nav + search tweaks */ .hamburger{display: none;}/* default hidden on desktop */ @media (max-width: 768px){.hamburger { display: block; cursor: pointer;}nav ul{display: none;}/* closed by default on mobile */ header.nav-open nav ul{display: flex;}/* open state */ } @media (max-width: 480px){.search-bar { max-width: 220px !important; margin: 0 0.5rem !important;}.search-bar input{font-size: 0.9rem; padding: 0.45rem;}} /* Step 14: Single-line header on very small screens */ @media (max-width: 480px){header {
+    flex-direction: row !important; align-items: center !important; padding: 0.5rem 0.75rem; gap: 0.5rem; flex-wrap: nowrap;}.logo{height: 36px !important;}.search-bar{flex: 1 1 auto; min-width: 0; /* allow shrinking */
+    max-width: none !important; margin: 0; /* no extra margins */
+    display: flex;}.search-bar input{width: 100%; font-size: 0.85rem; padding: 0.4rem;}.search-bar button{padding: 0 8px;}.search-bar button img{height: 14px;}.hamburger{display: block; margin-left: 0.25rem;}nav{width: 100%;}/* keep hidden until toggled */ header.nav-open nav ul{display: flex; flex-direction: column; gap: 0.75rem; padding-top: 0.5rem;}} /* Step 15: Responsive header + dropdown positions below the bar */ @media (max-width: 640px){header {
+    display: flex; flex-direction: row !important; align-items: center !important; justify-content: space-between; gap: 0.5rem; padding: 0.5rem 0.75rem; flex-wrap: nowrap;}.logo{height: clamp(28px, 6.5vw, 40px) !important;}.search-bar{flex: 1 1 auto; min-width: 0; max-width: none !important; margin: 0 0.5rem 0 0.5rem !important; display: flex;}.search-bar input{width: 100%; font-size: clamp(0.85rem, 2.5vw, 1rem); padding: 0.4rem;}.hamburger{display: block; cursor: pointer; margin-left: 0.25rem;}/* Drop-down menu hidden by default on mobile */ nav ul{display: none;}/* When open, show the menu below the fixed header as an overlay */ header.nav-open + div#content-wrapper{}header.nav-open nav ul{display: flex; flex-direction: column; gap: 0.75rem;}/* The menu itself is fixed and full-width under the header */ nav ul{position: fixed; left: 0; right: 0; top: 0; /* will be updated via js to match header height */
+    background: #0045a2; padding: 0.75rem 1rem; box-sizing: border-box; z-index: 1000;}nav ul li a{font-size: 0.95rem;}
+}</style>
+<style id="wcs-gallery-a11y">.gallery-item{cursor: pointer;}.gallery-item:focus-within .gallery-item-title, .gallery-item:hover .gallery-item-title{background: rgba(0, 69, 162, 0.95);}.lightbox-overlay[role="dialog"]{outline: none;}.lightbox-close{position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,0.6); color: #fff; border: none; border-radius: 4px; font-size: 1rem; padding: 6px 10px; cursor: pointer;}.lightbox-close:focus-visible{outline: 2px solid #fff; outline-offset: 2px;}</style>
+<link href="https://www.whitecementspecialties.net/" rel="canonical"/><link href="https://i.imgur.com/Ck9mkEG.png" rel="icon"/><meta content="website" property="og:type"/><meta content="White Cement Specialties" property="og:title"/><meta content="Your one-stop destination in Venice, FL for pavers, stucco, aggregates, and cement supplies." property="og:description"/><meta content="https://www.whitecementspecialties.net/" property="og:url"/><meta content="White Cement Specialties" property="og:site_name"/><meta content="https://i.imgur.com/Ck9mkEG.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="White Cement Specialties" name="twitter:title"/><meta content="Your one-stop destination in Venice, FL for pavers, stucco, aggregates, and cement supplies." name="twitter:description"/><meta content="https://i.imgur.com/Ck9mkEG.png" name="twitter:image"/><meta content="#0045a2" name="theme-color"/><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"White Cement Specialties","url":"https://www.whitecementspecialties.net/","logo":"https://i.imgur.com/Ck9mkEG.png","contactPoint":[{"@type":"ContactPoint","contactType":"customer service","telephone":"+1-941-488-2172","email":"orders@whitecement.net","areaServed":"US"}],"address":{"@type":"PostalAddress","streetAddress":"202 Seaboard Ave","addressLocality":"Venice","addressRegion":"FL","postalCode":"34285","addressCountry":"US"}}</script>
+<style id="wcs-lightbox-nav-css">.lightbox-overlay img{max-width: 90vw; max-height: 90vh;}.lightbox-prev, .lightbox-next{user-select: none;}</style>
+<style media="print">
+/* WCS Print Styles v1 (non-visual on screen) */
+@page { margin: 12mm; }
+header, nav, .hamburger { display: none !important; }
+#home iframe { display: none !important; }
+#content-wrapper { top: 0 !important; }
+a[href]:after { content: " (" attr(href) ")"; font-size: 90%; }
+button { display: none !important; }
+</style>
+</head>
+<body style="">
+<!-- WCS Noscript Notice v1 -->
+<noscript>
+<div style="padding:0.75rem; background:#fffbcc; color:#333; text-align:center; font-size:0.95rem;">
+    Some interactive features are unavailable because JavaScript is disabled. You can still browse products and contact us.
+  </div>
+</noscript>
+<header>
+<a href="#home" onclick="showSection('home')"><img alt="Logo" class="logo" decoding="async" fetchpriority="high" src="https://i.imgur.com/Ck9mkEG.png"/></a>
+<form class="search-bar" id="searchForm">
+<input id="searchInput" placeholder="Search..." type="text"/>
+<button type="submit">
+<img alt="Search" src="https://img.icons8.com/ios-filled/50/search--v1.png"/>
+</button>
+</form>
+<button aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu" class="hamburger"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+<nav>
+<ul id="primary-nav">
+<li><a href="#home" onclick="showSection('home')">Home</a></li>
+<li><a href="#products" onclick="showProducts()">Products</a></li>
+<li><a href="#gallery" onclick="showSection('gallery')">Gallery</a></li>
+<li><a href="#about" onclick="showSection('about')">About Us</a></li>
+<li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+<li><a href="#blog" onclick="showSection('blog')">Blog</a></li>
+</ul>
+</nav>
+</header>
+<div id="content-wrapper" style="position: relative; top: 100px;">
+<section class="center-flex fullvh-minus-10" id="home" style=""><div class="center-flex fullvh-minus-10" style=""><div style="position: relative; height: 100%; width: calc((100vh - 100px) * (16 / 9)); max-width: 100%; overflow: hidden;"><iframe allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen="true" frameborder="0" playsinline="true" src="https://www.youtube.com/embed/SfryQ66c-B8?autoplay=1&amp;loop=1&amp;playlist=SfryQ66c-B8&amp;mute=1&amp;controls=0&amp;modestbranding=1&amp;showinfo=0&amp;rel=0" style="width: 100%; height: 100%; border: none;" title="White Cement Specialties overview video"></iframe><div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)); color: white; display: flex; align-items: center; justify-content: center; text-align: center;"><h1 style="font-size: 2.5rem; max-width: 80%;">Your Gulf Coast Supplier for Pavers, Stucco, and Cement</h1></div></div></div></section>
+<section class="section-scroll section-pad center-flex flex-col" id="products" style="display: none;">
+<div class="flex-wrap-center" style="">
+<div class="product-card" id="tri-circle-pavers" style="width: 250px; background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"><a href="#tri-circle-products" onclick="showTriCircleProducts()" style="display: block; text-decoration: none; color: inherit;">
+<img alt="Pavers" decoding="async" loading="lazy" src="https://i.imgur.com/qe36sWY.jpg" style="width: 100%; border-radius: 0;"/>
+<h3 onclick="showTriCircleProducts()" style="margin: 10px 0; color: #0045a2; cursor: pointer;">Tri Circle Pavers</h3>
+<p onclick="showTriCircleProducts()" style="cursor: pointer;">Click to view our in-stock selection of premium pavers.</p>
+</a></div>
+<div class="product-card" id="stucco-supplies" style="width: 250px; background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"><a href="#stucco-products" onclick="showStuccoProducts()" style="display: block; text-decoration: none; color: inherit;">
+<img alt="Stucco Supplies" decoding="async" loading="lazy" src="https://i.imgur.com/hdDLA02.jpg" style="width: 100%; border-radius: 0;"/>
+<h3 style="margin: 10px 0; color: #0045a2;">Stucco Supplies</h3>
+<p>High-quality stucco materials for professional finishes.</p>
+</a></div>
+<div class="product-card" id="aggregates-decorative-stone" style="width: 250px; background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+<img alt="Aggregates &amp; Decorative Stone" decoding="async" loading="lazy" src="https://i.imgur.com/Dm8dLCV.jpg" style="width: 100%; border-radius: 0;"/>
+<h3 style="margin: 10px 0; color: #0045a2;">Aggregates &amp; Decorative Stone</h3>
+<p>Various grades of sand, gravel, and crushed stone for every job.</p>
+</div>
+<div class="product-card" id="furniture-decor" style="width: 250px; background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+<img alt="Furniture &amp; Decor" decoding="async" loading="lazy" src="https://i.imgur.com/atlDmVz.jpg" style="width: 100%; border-radius: 0;"/>
+<h3 style="margin: 10px 0; color: #0045a2;">Furniture &amp; Decor</h3>
+<p>Custom-manufactured cement furniture and decorative elements built in-house.</p>
+</div>
+</div>
+</section>
+<section class="section-scroll section-pad center-flex flex-col" id="gallery" style="display: none;">
+<style>.gallery-item{position: relative; overflow: hidden; border-radius: 0;}.gallery-item img{width: 100%; height: 200px; object-fit: cover; display: block;}.gallery-item-title{position: absolute; bottom: 0; width: 100%; background: rgba(0, 69, 162, 0.8); color: white; text-align: center; font-weight: bold; padding: 0.5rem;}
+  </style>
+<div class="gallery-grid" style="">
+<div class="gallery-item">
+<img alt="Rising Star" decoding="async" height="200" loading="lazy" src="https://imgur.com/DDxe1Am.jpg" width="400"/>
+<div class="gallery-item-title">Rising Star</div>
+</div>
+<div class="gallery-item">
+<img alt="B&amp;C Pavers" decoding="async" height="200" loading="lazy" src="https://imgur.com/AtKOW9m.jpg" width="400"/>
+<div class="gallery-item-title">B&amp;C Pavers</div>
+</div>
+<div class="gallery-item">
+<img alt="Summer Pavers" decoding="async" height="200" loading="lazy" src="https://imgur.com/52foYBd.jpg" width="400"/>
+<div class="gallery-item-title">Summer Pavers</div>
+</div>
+<div class="gallery-item">
+<img alt="JS Brick" decoding="async" height="200" loading="lazy" src="https://imgur.com/0ImhGZc.jpg" width="400"/>
+<div class="gallery-item-title">JS Brick</div>
+</div>
+<div class="gallery-item">
+<img alt="Champion Pavers" decoding="async" height="200" loading="lazy" src="https://imgur.com/ZDA5BoI.jpg" width="400"/>
+<div class="gallery-item-title">Champion Pavers</div>
+</div>
+<div class="gallery-item">
+<img alt="Custom Pavers" decoding="async" height="200" loading="lazy" src="https://imgur.com/s6jzf6j.jpg" width="400"/>
+<div class="gallery-item-title">Custom Pavers</div>
+</div>
+</div>
+</section>
+<script>  // Guard to prevent duplicate overlays
+  window.__wcsLightboxOpen = false;
+
+  (function(){
+    // Build gallery list once DOM is ready
+    var GALLERY = [];
+    function buildGallery(){
+      GALLERY = Array.prototype.slice.call(document.querySelectorAll('#gallery .gallery-item img'))
+        .map(function(img, idx){ return {src: img.getAttribute('src'), alt: img.getAttribute('alt')||'', index: idx}; });
+    }
+
+    function focusTrap(e, focusables, currentIndexRef){
+      if (e.key !== 'Tab') return;
+      var first = focusables[0], last = focusables[focusables.length-1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+
+    function preload(src){
+      var i = new Image();
+      i.decoding = 'async';
+      i.src = src;
+    }
+
+    window.showLightbox = function(src, alt, trigger, startIndex){
+      if (window.__wcsLightboxOpen) return;
+      window.__wcsLightboxOpen = true;
+
+      var overlay = document.createElement('div');
+      overlay.className = 'lightbox-overlay';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.tabIndex = -1;
+
+      var img = document.createElement('img');
+      img.src = src;
+      if (alt) img.alt = alt;
+
+      var closeBtn = document.createElement('button');
+      closeBtn.className = 'lightbox-close';
+      closeBtn.type = 'button';
+      closeBtn.textContent = 'Close';
+      closeBtn.setAttribute('aria-label', 'Close image viewer');
+
+      var prevBtn = document.createElement('button');
+      prevBtn.className = 'lightbox-prev';
+      prevBtn.type = 'button';
+      prevBtn.textContent = '‹';
+      prevBtn.setAttribute('aria-label', 'Previous image');
+
+      var nextBtn = document.createElement('button');
+      nextBtn.className = 'lightbox-next';
+      nextBtn.type = 'button';
+      nextBtn.textContent = '›';
+      nextBtn.setAttribute('aria-label', 'Next image');
+
+      // Basic styles for prev/next (kept inline to avoid touching global CSS)
+      var navBtnStyle = 'position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:4px;font-size:1.25rem;padding:8px 12px;cursor:pointer;';
+      prevBtn.style.cssText = navBtnStyle + 'left:12px;';
+      nextBtn.style.cssText = navBtnStyle + 'right:12px;';
+
+      var curIndex = typeof startIndex === 'number' ? startIndex : (GALLERY.findIndex(function(g){return g.src===src;}) || 0);
+
+      function setImageByIndex(i){
+        if (!GALLERY.length) return;
+        if (i < 0) i = GALLERY.length - 1;
+        if (i >= GALLERY.length) i = 0;
+        curIndex = i;
+        var item = GALLERY[curIndex];
+        img.src = item.src;
+        img.alt = item.alt || '';
+        // Preload neighbors
+        var prevI = (curIndex - 1 + GALLERY.length) % GALLERY.length;
+        var nextI = (curIndex + 1) % GALLERY.length;
+        preload(GALLERY[prevI].src);
+        preload(GALLERY[nextI].src);
+      }
+
+      function cleanup(){
+        document.removeEventListener('keydown', onKey, true);
+        overlay.removeEventListener('click', onOverlayClick, true);
+        if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        window.__wcsLightboxOpen = false;
+        if (trigger && typeof trigger.focus === 'function') trigger.focus();
+      }
+
+      function onKey(e){
+        if (e.key === 'Escape') { e.stopPropagation(); cleanup(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); setImageByIndex(curIndex - 1); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); setImageByIndex(curIndex + 1); }
+        else { focusTrap(e, focusables, {value:curIndex}); }
+      }
+
+      function onOverlayClick(e){
+        if (e.target === overlay) { e.preventDefault(); e.stopPropagation(); cleanup(); }
+      }
+
+      prevBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); setImageByIndex(curIndex - 1); });
+      nextBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); setImageByIndex(curIndex + 1); });
+      closeBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); cleanup(); });
+
+      overlay.addEventListener('click', onOverlayClick, { capture: false });
+      document.addEventListener('keydown', onKey, true);
+
+      overlay.appendChild(img);
+      overlay.appendChild(prevBtn);
+      overlay.appendChild(nextBtn);
+      overlay.appendChild(closeBtn);
+      document.body.appendChild(overlay);
+
+      // Focusable controls for trap
+      var focusables = [prevBtn, nextBtn, closeBtn];
+      closeBtn.focus();
+
+      // Initialize gallery list and set index
+      if (!GALLERY.length) buildGallery();
+      setImageByIndex(curIndex);
+    };
+
+    document.addEventListener('DOMContentLoaded', buildGallery);
+  })();</script>
+<style>.lightbox-overlay{position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); display: flex; align-items: center; justify-content: center; z-index: 9999;}.lightbox-overlay img{max-width: 90vw; max-height: 90vh; border-radius: 0; box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);}</style>
+<section class="text-center" id="about" style="">
+<div class="product-card about-card" id="product-card" style="">
+<h2 style="color: #0045a2; margin-bottom: 1rem;">About Us</h2>
+<p style="font-size: 0.95rem; line-height: 1.6; color: #333;">
+<strong>White Cement Specialties</strong> is a locally operated, veteran-owned supplier proudly serving the Venice, Florida community and the greater Gulf Coast for over 40 years. We specialize in providing high-quality pavers, sealers, stucco materials, decorative concrete, and landscape supplies—available in both bulk and bagged options. As a trusted manufacturer of specialty concrete products, we offer everything from custom benches and stepping stones to masonry mixes and hardscape essentials. Known for our hands-on customer service, fast delivery, and competitive pricing, we are committed to supporting projects of all sizes—whether you're enhancing a backyard patio or managing a large-scale build. Our mission is to deliver reliable, personalized solutions with the professionalism and expertise our community has come to expect.
+      </p>
+<p style="font-size: 0.95rem; line-height: 1.6; color: #333;">
+        Driven by our vision to be the Gulf Coast’s most trusted partner in outdoor building solutions, we combine expert guidance, fast delivery, and competitive pricing to help bring your projects to life—whether you're enhancing a backyard or building a community.
+      </p>
+</div>
+</section>
+<section id="contact"><div class="contact-wrapper container-md" style=""><form action="https://formsubmit.co/travissmith84@gmail.com" id="contactForm" method="POST"><input name="_captcha" type="hidden" value="false"/><input name="_subject" type="hidden" value="Website Quote Request from whitecementspecialties.net"/><input name="_template" type="hidden" value="table"/><input autocomplete="off" name="_honey" style="display: none;" tabindex="-1" type="text"/><div style="display: flex; flex-direction: column; gap: 1rem; flex: 1;">
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-papNMf0xU1cQ1zvDIfAklHt4YypU7XnBBbyYl1m+u4RVLUU+l0lAHM8kILDrCF3FdyeXlB3wlE2nT5SQaG9how==" referrerpolicy="no-referrer" rel="stylesheet"/>
+<style>#contactForm input::placeholder, #contactForm textarea::placeholder{color: #999; font-style: italic;}#contactForm select:focus, #contactForm input:focus, #contactForm textarea:focus{outline: none; border-color: #0045a2; box-shadow: 0 0 0 2px rgba(0, 69, 162, 0.2);}#contactForm input[type="text"], #contactForm textarea, #contactForm select{transition: all 0.2s ease;}#contactForm label{font-size: 0.85rem; color: #333; margin-bottom: 0.25rem;}#contactForm button:hover{background-color: #003a8c; cursor: pointer;}
+  </style>
+<h3 style="text-align: center; margin: 0 0 1rem; font-size: 1.5rem; color: #0045a2;">Request a Quote</h3>
+<div id="quoteFields">
+<label for="customerType" style="font-weight: 600; font-size: 0.95rem;">Customer Type</label>
+<select id="customerType" name="customerType" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 0;">
+<option value="homeowner">Homeowner / Residential</option>
+<option value="business">Business / Commercial</option>
+</select>
+<div id="homeownerFields">
+<div style="position: relative;">
+<i style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="name" placeholder="Full Name*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="address" placeholder="Street Address*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="phone" pattern="[0-9\-\+\(\)\s\.]{7,}" placeholder="Phone Number*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="tel"/>
+</div>
+<div style="position: relative;">
+<i style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="email" placeholder="Email Address*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="email"/>
+</div>
+</div>
+<div id="businessFields" style="display: none;">
+<div style="position: relative;">
+<i style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="business" placeholder="Business Name*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="biz_address" placeholder="Business Address*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="biz_phone" pattern="[0-9\-\+\(\)\s\.]{7,}" placeholder="Phone Number*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="tel"/>
+</div>
+<div style="position: relative;">
+<i style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="ein" placeholder="EIN*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="text"/>
+</div>
+<div style="position: relative;">
+<i style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+<input name="biz_email" placeholder="Email Address*" required="" style="padding-left: 2rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; width: 100%;" type="email"/>
+</div>
+</div>
+<textarea name="materials" placeholder="Materials Requested (quantity/type)*" required="" rows="6" style="padding: 0.75rem; border: 1px solid #ccc; border-radius: 0; resize: vertical; height: 250px; width: 100%;"></textarea><button style="background: #0045a2; color: white; padding: 0.75rem; font-weight: bold; font-size: 1rem; border: none; border-radius: 0;" type="submit">Submit</button>
+</div>
+<script>  (function() {
+    const customerTypeSelect = document.getElementById('customerType');
+    const homeownerFields = document.getElementById('homeownerFields');
+    const businessFields = document.getElementById('businessFields');
+    const REQUIRED_NAMES = new Set(['name','address','phone','email','materials','business','biz_address','biz_phone','biz_email','ein']);
+
+    function setGroupState(groupEl, required) {
+      if (!groupEl) return;
+      groupEl.querySelectorAll('input, select, textarea').forEach(el => {
+        // Always enable visible group's inputs; disable hidden group's inputs so they don't submit
+        if (required) {
+          el.removeAttribute('disabled');
+        } else {
+          el.setAttribute('disabled', '');
+        }
+        // Toggle required for key fields only
+        if (REQUIRED_NAMES.has(el.name)) {
+          if (required) el.setAttribute('required', '');
+          else el.removeAttribute('required');
+        }
+      });
+    }
+
+    function applyMode(mode) {
+      if (mode === 'homeowner') {
+        if (homeownerFields) homeownerFields.style.display = 'block';
+        if (businessFields) businessFields.style.display = 'none';
+        setGroupState(homeownerFields, true);
+        setGroupState(businessFields, false);
+      } else {
+        if (homeownerFields) homeownerFields.style.display = 'none';
+        if (businessFields) businessFields.style.display = 'block';
+        setGroupState(homeownerFields, false);
+        setGroupState(businessFields, true);
+      }
+    }
+
+    if (customerTypeSelect) {
+      customerTypeSelect.addEventListener('change', function () {
+        applyMode(this.value);
+      });
+      // Initialize
+      document.addEventListener('DOMContentLoaded', function() {
+        applyMode(customerTypeSelect.value || 'homeowner');
+      });
+    }
+  })();</script>
+</div></form><div class="contact-info">
+<h3 style="color: #0045a2;">Contact Information</h3>
+<p style="margin: 0.5rem 0;"><strong>Address:</strong><br/>202 Seaboard Ave<br/>Venice, FL 34285</p>
+<p style="margin: 0.5rem 0;"><strong>Phone:</strong><br/><a href="tel:+19414882172" style="color: #0045a2; text-decoration: none;">(941) 488-2172</a></p>
+<p style="margin: 0.5rem 0;"><strong>Email:</strong><br/><a href="mailto:orders@whitecement.net" style="color: #0045a2; text-decoration: none;">orders@whitecement.net</a></p>
+</div></div><div style="display: flex; gap: 2rem; max-width: 1100px; width: 100%; margin: 0 auto; align-items: flex-start;"></div>
+</section></div>
+<section id="tri-circle-products" style="display: none; position: relative; height: calc(100vh - 100px); overflow-y: auto; padding: 2rem; background-color: #f9f9f9;">
+<h2 style="text-align: center; color: #0045a2; margin-bottom: 2rem;">Tri Circle Pavers - In Stock</h2>
+<div class="stock-legend"><span class="item"><span class="dot in"></span>In Stock</span><span class="item"><span class="dot low"></span>Low Stock</span><span class="item"><span class="dot out"></span>Out of Stock</span></div><div class="grid-auto">
+<div class="product-card" id="euro-2pc-chestnut-buff-charcoal">
+<img alt="Chestnut Buff Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/5O32adf.jpg" width="400"/><img alt="Euro 2PC - Chestnut Buff Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/wQ00tee.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Chestnut Buff Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-creme-pecan-chocolate">
+<img alt="Creme Pecan Chocolate" decoding="async" height="180" loading="lazy" src="https://imgur.com/lBlPa4c.jpg" width="400"/><img alt="Euro 2PC - Creme Pecan Chocolate" decoding="async" height="180" loading="lazy" src="https://imgur.com/wQ00tee.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Creme Pecan Chocolate</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-malt-pecan-charcoal">
+<img alt="Malt Pecan Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/9eYtd3d.jpg" width="400"/><img alt="Euro 2PC - Malt Pecan Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/wQ00tee.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Malt Pecan Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-red-yellow-charcoal">
+<img alt="Red Yellow Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/b4x8umm.jpg" width="400"/><img alt="Euro 2PC - Red Yellow Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/wQ00tee.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Red Yellow Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-vanilla-pecan-charcoal">
+<img alt="Vanilla Pecan Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/bbD8nqe.jpg" width="400"/><img alt="Euro 2PC - Vanilla Pecan Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/wQ00tee.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - Vanilla Pecan Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-white-charcoal">
+<img alt="White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt="Euro 2PC - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/wQ00tee.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt="Euro 2PC - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/wQ00tee.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="euro-2pc-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt="Euro 2PC - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/wQ00tee.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Euro 2PC - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="apollo-white-charcoal">
+<img alt="White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt="Apollo - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Ie19FZH.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Apollo - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="apollo-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt="Apollo - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Ie19FZH.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Apollo - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="apollo-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt="Apollo - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/Ie19FZH.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Apollo - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="mega-smooth-white-charcoal">
+<img alt="White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt="Mega Smooth - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/etgpuf5.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Smooth - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="mega-smooth-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt="Mega Smooth - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/etgpuf5.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Smooth - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="mega-smooth-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt="Mega Smooth - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/etgpuf5.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Smooth - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="mega-stone-white-charcoal">
+<img alt="White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt="Mega Stone - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/a5WnRqJ.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Stone - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="mega-stone-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt="Mega Stone - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/a5WnRqJ.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Stone - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="mega-stone-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt="Mega Stone - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/a5WnRqJ.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Mega Stone - White Vanilla Coconut</h3>
+</div>
+<div class="product-card" id="4x8-white-charcoal">
+<img alt="White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt="4x8 - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/QDqYsze.jpg" width="400"/>
+<div style="padding: 1rem;">
+<h3 style="color: #0045a2;">4x8 - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="4x8-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt="4x8 - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/QDqYsze.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">4x8 - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="4x8-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt="4x8 - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/QDqYsze.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">4x8 - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="bullnose-coping-white-charcoal">
+<img alt="White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt="Bullnose Coping - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/IUejPJG.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Bullnose Coping - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="bullnose-coping-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt="Bullnose Coping - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/IUejPJG.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Bullnose Coping - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="bullnose-coping-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt="Bullnose Coping - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/IUejPJG.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Bullnose Coping - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-1-white-charcoal">
+<img alt="White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt='Remodel Coping 1"' decoding="async" height="180" loading="lazy" src="https://imgur.com/vqc455j.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 1" - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-2.5-white-charcoal">
+<img alt="White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt='Remodel Coping 2.5"' decoding="async" height="180" loading="lazy" src="https://imgur.com/4nzapes.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 2.5" - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-2.5-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt='Remodel Coping 2.5"' decoding="async" height="180" loading="lazy" src="https://imgur.com/4nzapes.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 2.5" - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-2.5-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt='Remodel Coping 2.5"' decoding="async" height="180" loading="lazy" src="https://imgur.com/4nzapes.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 2.5" - White Vanilla Coconut</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-4-white-charcoal">
+<img alt="White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt='Remodel Coping 4"' decoding="async" height="180" loading="lazy" src="https://imgur.com/iytqy6s.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 4" - White Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-4-white-coconut-charcoal">
+<img alt="White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt='Remodel Coping 4"' decoding="async" height="180" loading="lazy" src="https://imgur.com/iytqy6s.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 4" - White Coconut Charcoal</h3>
+</div>
+</div>
+<div class="product-card" id="remodel-coping-4-white-vanilla-coconut">
+<img alt="White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt='Remodel Coping 4"' decoding="async" height="180" loading="lazy" src="https://imgur.com/iytqy6s.jpg" width="400"/>
+<div class="body" style="padding: 1rem;">
+<h3 style="color: #0045a2;">Remodel Coping 4" - White Vanilla Coconut</h3>
+</div>
+</div>
+</div>
+<div class="product-card" id="4x8-white-charcoal-2"><img alt="4x8 - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt="4x8 - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/QDqYsze.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">4x8 - White Charcoal</h3></div></div><div class="product-card" id="4x8-white-coconut-charcoal-2"><img alt="4x8 - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt="4x8 - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/QDqYsze.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">4x8 - White Coconut Charcoal</h3></div></div><div class="product-card" id="4x8-white-vanilla-coconut-2"><img alt="4x8 - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt="4x8 - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/QDqYsze.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">4x8 - White Vanilla Coconut</h3></div></div><div class="product-card" id="bullnose-coping-white-charcoal-2"><img alt="Bullnose Coping - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt="Bullnose Coping - White Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/IUejPJG.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Bullnose Coping - White Charcoal</h3></div></div><div class="product-card" id="bullnose-coping-white-coconut-charcoal-2"><img alt="Bullnose Coping - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt="Bullnose Coping - White Coconut Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/IUejPJG.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Bullnose Coping - White Coconut Charcoal</h3></div></div><div class="product-card" id="bullnose-coping-white-vanilla-coconut-2"><img alt="Bullnose Coping - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt="Bullnose Coping - White Vanilla Coconut" decoding="async" height="180" loading="lazy" src="https://imgur.com/IUejPJG.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Bullnose Coping - White Vanilla Coconut</h3></div></div><div class="product-card" id="remodel-coping-1-white-charcoal-2"><img alt='Remodel Coping 1" - White Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt='Remodel Coping 1" - White Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/vQC455j.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 1" - White Charcoal</h3></div></div><div class="product-card" id="remodel-coping-2.5-white-charcoal-2"><img alt='Remodel Coping 2.5" - White Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt='Remodel Coping 2.5" - White Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/4nzAPES.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 2.5" - White Charcoal</h3></div></div><div class="product-card" id="remodel-coping-2.5-white-coconut-charcoal-2"><img alt='Remodel Coping 2.5" - White Coconut Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt='Remodel Coping 2.5" - White Coconut Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/4nzAPES.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 2.5" - White Coconut Charcoal</h3></div></div><div class="product-card" id="remodel-coping-2.5-white-vanilla-coconut-2"><img alt='Remodel Coping 2.5" - White Vanilla Coconut' decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt='Remodel Coping 2.5" - White Vanilla Coconut' decoding="async" height="180" loading="lazy" src="https://imgur.com/4nzAPES.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 2.5" - White Vanilla Coconut</h3></div></div><div class="product-card" id="remodel-coping-4-white-charcoal-2"><img alt='Remodel Coping 4" - White Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/Z994jAs.jpg" width="400"/><img alt='Remodel Coping 4" - White Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/iYTqY6s.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 4" - White Charcoal</h3></div></div><div class="product-card" id="remodel-coping-4-white-coconut-charcoal-2"><img alt='Remodel Coping 4" - White Coconut Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/f5AykSR.jpg" width="400"/><img alt='Remodel Coping 4" - White Coconut Charcoal' decoding="async" height="180" loading="lazy" src="https://imgur.com/iYTqY6s.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 4" - White Coconut Charcoal</h3></div></div><div class="product-card" id="remodel-coping-4-white-vanilla-coconut-2"><img alt='Remodel Coping 4" - White Vanilla Coconut' decoding="async" height="180" loading="lazy" src="https://imgur.com/YurpR0C.jpg" width="400"/><img alt='Remodel Coping 4" - White Vanilla Coconut' decoding="async" height="180" loading="lazy" src="https://imgur.com/iYTqY6s.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">Remodel Coping 4" - White Vanilla Coconut</h3></div></div><div class="product-card" id="4x8-charcoal"><img alt="4x8 - Charcoal" decoding="async" height="180" loading="lazy" src="https://imgur.com/xb3TWyb.jpg" width="400"/><img alt="4x8 - Charcoal (alt view)" decoding="async" height="180" loading="lazy" src="https://imgur.com/QDqYsze.jpg" width="400"/><div class="body" style="padding: 1rem;"><h3 style="color: #0045a2;">4x8 - Charcoal</h3></div></div></div></section>
+<section id="stucco-products" style="display: none; height: calc(100vh - 200px); overflow-y: auto; padding: 2rem; background-color: #f9f9f9;">
+<h2 style="text-align: center; color: #0045a2; margin-bottom: 2rem;">Stucco Products - In Stock</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+<div class="product-card" id="16x5-scratcher-trowel" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="16X5 Scratcher Trowel" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/po9K9gH.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">16X5 Scratcher Trowel</h3>
+</div>
+<div class="product-card" id="2-5-sf-dimple-tilath-27x97" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="2.5 SF (DIMPLE) TILATH 27”X97”" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/kFP8Rzp.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">2.5 SF (DIMPLE) TILATH 27”X97”</h3>
+</div>
+<div class="product-card" id="3-8-conc-stubs-9gax3-8-red-s" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='3/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/mr8xzcl.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">3/8" CONC STUBS 9GAX3/8" RED "S"</h3>
+</div>
+<div class="product-card" id="4-stucco-mesh-tape" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='4"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/6dhe8k9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">4" STUCCO MESH TAPE</h3>
+</div>
+<div class="product-card" id="4-mil-clear-polyfilm-10-x-100-visquine" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="4 MIL CLEAR POLYFILM 10' X 100' (VISQUINE)" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/mbczAFi.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">4 MIL CLEAR POLYFILM 10' X 100' (VISQUINE)</h3>
+</div>
+<div class="product-card" id="50-lb-case-3-8-stub-nails" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='50 LB CASE 3/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/ynyk0a5.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">50 LB CASE 3/8" STUB NAILS</h3>
+</div>
+<div class="product-card" id="60-min-15-lb-felt-roll" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="60 MIN (15 LB) FELT ROLL" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/p2hGz1U.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">60 MIN (15 LB) FELT ROLL</h3>
+</div>
+<div class="product-card" id="60-min-30-lb-felt-roll" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="60 MIN (30 LB) FELT ROLL" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/IUbRJbH.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">60 MIN (30 LB) FELT ROLL</h3>
+</div>
+<div class="product-card" id="9-5-stucco-mesh-tape" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='9.5"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/jwusjqk.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">9.5" STUCCO MESH TAPE</h3>
+</div>
+<div class="product-card" id="casing-bead-1" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CASING BEAD - 1"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/tzxcmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1"</h3>
+</div>
+<div class="product-card" id="casing-bead-1-1-4" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CASING BEAD - 1-1/4"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/tzxcmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1-1/4"</h3>
+</div>
+<div class="product-card" id="casing-bead-1-1-2" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CASING BEAD - 1-1/2"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/tzxcmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1-1/2"</h3>
+</div>
+<div class="product-card" id="casing-bead-1-4" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CASING BEAD - 1/4"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/tzxcmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1/4"</h3>
+</div>
+<div class="product-card" id="casing-bead-1-2" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CASING BEAD - 1/2"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/tzxcmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 1/2"</h3>
+</div>
+<div class="product-card" id="casing-bead-2" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CASING BEAD - 2"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/tzxcmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 2"</h3>
+</div>
+<div class="product-card" id="casing-bead-3-4" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CASING BEAD - 3/4"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/tzxcmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 3/4"</h3>
+</div>
+<div class="product-card" id="casing-bead-3-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CASING BEAD - 3/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/tzxcmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 3/8"</h3>
+</div>
+<div class="product-card" id="casing-bead-5-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CASING BEAD - 5/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/tzxcmz9.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CASING BEAD - 5/8"</h3>
+</div>
+<div class="product-card" id="control-joint-m-type-1-2" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CONTROL JOINT (M TYPE) - 1/2"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 1/2"</h3>
+</div>
+<div class="product-card" id="control-joint-m-type-3-4" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CONTROL JOINT (M TYPE) - 3/4"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 3/4"</h3>
+</div>
+<div class="product-card" id="control-joint-m-type-3-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CONTROL JOINT (M TYPE) - 3/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 3/8"</h3>
+</div>
+<div class="product-card" id="control-joint-m-type-5-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CONTROL JOINT (M TYPE) - 5/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 5/8"</h3>
+</div>
+<div class="product-card" id="control-joint-m-type-7-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CONTROL JOINT (M TYPE) - 7/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/wje9nnb.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CONTROL JOINT (M TYPE) - 7/8"</h3>
+</div>
+<div class="product-card" id="corner-bead-2-5x2-5" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='CORNER BEAD 2.5X2.5"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/0j8oryl.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CORNER BEAD 2.5X2.5</h3>
+</div>
+<div class="product-card" id="corner-bead-wide-flange" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="CORNER BEAD WIDE FLANGE" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/0j8ORyL.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">CORNER BEAD WIDE FLANGE</h3>
+</div>
+<div class="product-card" id="foundation-weep-screed-3-4" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='FOUNDATION WEEP SCREED - 3/4"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/f5yotew.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">FOUNDATION WEEP SCREED - 3/4"</h3>
+</div>
+<div class="product-card" id="foundation-weep-screed-7-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='FOUNDATION WEEP SCREED - 7/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/f5yotew.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">FOUNDATION WEEP SCREED - 7/8"</h3>
+</div>
+<div class="product-card" id="green-plastic-foam-float-9-5-x-4-x-3-4" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='GREEN PLASTIC FOAM FLOAT (9.5"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/kblyf9p.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">GREEN PLASTIC FOAM FLOAT (9.5" X 4" X 3/4")</h3>
+</div>
+<div class="product-card" id="link-lanco-bonding-agent-1gal" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="LINK - LANCO BONDING AGENT (1GAL)" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/VXjFKZC.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">LINK - LANCO BONDING AGENT (1GAL)</h3>
+</div>
+<div class="product-card" id="link-lanco-bonding-agent-5gal" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="LINK - LANCO BONDING AGENT (5GAL)" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/VXjFKZC.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">LINK - LANCO BONDING AGENT (5GAL)</h3>
+</div>
+<div class="product-card" id="mid-wall-weep-screed-1-2" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='MID-WALL WEEP SCREED - 1/2"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/f5yotew.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">MID-WALL WEEP SCREED - 1/2"</h3>
+</div>
+<div class="product-card" id="mid-wall-weep-screed-5-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='MID-WALL WEEP SCREED - 5/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/f5yotew.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">MID-WALL WEEP SCREED - 5/8"</h3>
+</div>
+<div class="product-card" id="quickrete-premix-stucco-base-coat-mix-80lb-42-bags-pallet" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="QUICKRETE PREMIX STUCCO BASE COAT MIX 80LB 42 BAGS/PALLET" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/sOKN9nx.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">QUICKRETE PREMIX STUCCO BASE COAT MIX 80LB 42 BAGS/PALLET</h3>
+</div>
+<div class="product-card" id="replacement-magnetic-head-for-tp02085-magnetic-hammer" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="REPLACEMENT MAGNETIC HEAD FOR TP02085 MAGNETIC HAMMER" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/BvmUl5E.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">REPLACEMENT MAGNETIC HEAD FOR TP02085 MAGNETIC HAMMER</h3>
+</div>
+<div class="product-card" id="red-stucco-tape-2-x60yd" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='RED STUCCO TAPE 2"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/h8f4nzo.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">RED STUCCO TAPE 2"X60YD</h3>
+</div>
+<div class="product-card" id="roof-wall-weep-screed-5-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='ROOF - WALL WEEP SCREED 5/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/f5yotew.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">ROOF - WALL WEEP SCREED 5/8"</h3>
+</div>
+<div class="product-card" id="solid-wide-flange-casing-bead-weep-screed-7-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='SOLID WIDE-FLANGE CASING BEAD (WEEP SCREED) 7/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/f5yotew.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">SOLID WIDE-FLANGE CASING BEAD (WEEP SCREED) 7/8"</h3>
+</div>
+<div class="product-card" id="stretch-wrap-18" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='STRETCH WRAP 18"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/mnkemag.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">STRETCH WRAP 18"</h3>
+</div>
+<div class="product-card" id="straight-cut-aviation-snips-w-yellow-handle" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="STRAIGHT CUT AVIATION SNIPS W/YELLOW HANDLE" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/kAPkmNn.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">STRAIGHT CUT AVIATION SNIPS W/YELLOW HANDLE</h3>
+</div>
+<div class="product-card" id="super-mixer" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="SUPER MIXER" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/QYXjAq5.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">SUPER MIXER</h3>
+</div>
+<div class="product-card" id="titan-stucco-cement-bagged-80lb" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="TITAN STUCCO CEMENT BAGGED 80LB" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/Ra4YXxU.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">TITAN STUCCO CEMENT BAGGED 80LB</h3>
+</div>
+<div class="product-card" id="tn58hc-5-8-x0-97-10m-t-nails-hardwire" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='TN58HC 5/8"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/ynyk0a5.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">TN58HC 5/8"X0.97 @ 10M T-NAILS HARDWIRE</h3>
+</div>
+<div class="product-card" id="visquine-1-5mil-clear-polyfilm-8-4-x-200" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt="VISQUINE 1.5MIL CLEAR POLYFILM 8'4&quot;" decoding="async" height="180" loading="lazy" src="https://i.imgur.com/mbczafi.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">VISQUINE 1.5MIL CLEAR POLYFILM 8'4" X 200'</h3>
+</div>
+<div class="product-card" id="window-guard-21-x-600-blue" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='WINDOW GUARD 21"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/val32fv.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">WINDOW GUARD 21" X 600' (BLUE)</h3>
+</div>
+<div class="product-card" id="1-x-1-1-2-leg-staples" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='1"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/rm6buwt.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">1" X 1-1/2" LEG STAPLES</h3>
+</div>
+<div class="product-card" id="1-2-conc-stubs-9gax3-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='1/2"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/mr8xzcl.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">1/2" CONC STUBS 9GAX3/8"</h3>
+</div>
+<div class="product-card" id="3-4-conc-stubs-9gax3-8" style="background: white; padding: 1rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: center;">
+<img alt='3/4"' decoding="async" height="180" loading="lazy" src="https://i.imgur.com/mr8xzcl.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 0;" width="400"/>
+<h3 style="color: #0045a2; margin-top: 1rem; font-size: 0.95rem;">3/4" CONC STUBS 9GAX3/8"</h3>
+</div>
+</div>
+</section>
+<section id="scrolling-reviews" style="position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #ccc; padding: 1rem 0; box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 998;">
+<div style="text-align: center; margin-bottom: 0.5rem;">
+<a href="https://search.google.com/local/writereview?placeid=ChIJ7YRjkbFbw4gR_VKbdUrt9Sc" style="padding: 10px 20px; background: #0045a2; color: white; font-weight: bold; border-radius: 0; text-decoration: none;" target="_blank">Leave a Review</a>
+</div>
+<div style="display: flex; gap: 1rem; animation: scroll 40s linear infinite; width: max-content; padding: 0 1rem;">
+<div style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“Outstanding customer service and a beautiful selection of materials!”</div>
+<div style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“They made the whole process so easy from start to finish.”</div>
+<div style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“Highly recommend White Cement for any hardscape needs.”</div>
+<div style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“Great prices and on-time delivery. Five stars!”</div>
+<div style="background: #e8f0ff; padding: 1rem; border-radius: 0; min-width: 250px; box-shadow: 0 3px 6px rgba(0,0,0,0.1);">“Knowledgeable staff helped me choose the perfect pavers.”</div>
+</div>
+</section>
+<section id="blog" style="display: none; height: calc(100vh - 200px); overflow-y: auto; padding: 2rem;">
+<div class="product-card" id="product-card-2" style="max-width: 800px; background: white; padding: 2rem; border-radius: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin: auto;">
+<h2 style="color: #0045a2; margin-bottom: 1rem;">Company Blog</h2>
+<div id="blogContent" style="white-space: pre-wrap; font-size: 0.95rem; color: #333; line-height: 1.6;"></div>
+</div>
+</section>
+<style>@keyframes scroll{from { transform: translateX(0);}to{transform: translateX(-50%);}
+  }</style>
+<!-- Lightbox Popup Start -->
+<div id="customLightbox" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.75); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+<div onclick="hideLightbox()" style="cursor: pointer;">
+<img alt="New Product Announcement" src="https://i.imgur.com/OlREV7p.png" style="max-width: 70vw; max-height: 70vh; border-radius: 0; box-shadow: 0 0 20px rgba(255,255,255,0.5);"/>
+</div>
+</div>
+<script>  function hideLightbox() {
+    const lb = document.getElementById('customLightbox');
+    if (lb) lb.remove();
+    localStorage.setItem('lightboxShown', 'true');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!localStorage.getItem('lightboxShown')) {
+      document.body.insertAdjacentHTML('beforeend', document.getElementById('customLightbox').outerHTML);
+    }
+  });</script>
+<!-- Lightbox Popup End -->
+<!-- Orphaned script commented out for stability: --><!-- Orphaned script commented out for stability: --><!-- Orphaned script commented out for stability: -->
+<script>  function hideAllSections() {
+    const sections = document.querySelectorAll('#content-wrapper > section');
+    sections.forEach(section => {
+      section.style.display = 'none';
+      section.classList.remove('active');
+    });
+  }
+
+  
+  }
+
+  
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    hideAllSections();
+    const home = document.getElementById('home');
+    if (home) home.style.display = 'flex';
+  });</script>
+<script src="inventory.js"></script>
+<!-- Chat Character with Clickable Behavior -->
+<style>#chat-seahorse{position: fixed; bottom: 20px; right: 20px; z-index: 9999; width: 225px; height: auto; cursor: pointer;}@media (max-width: 768px){#chat-seahorse {
+      width: 80px; bottom: 10px; right: 10px;}} #chat-form{display: none; position: fixed; bottom: 100px; right: 20px; z-index: 9999; background: white; padding: 1rem; border: 1px solid #ccc; box-shadow: 0 2px 8px rgba(0,0,0,0.2); width: 280px; border-radius: 6px;}#chat-form textarea{width: 100%; height: 80px; margin-bottom: 0.5rem;}#chat-form button{background: #0045a2; color: white; border: none; padding: 0.5rem 1rem; font-weight: bold; cursor: pointer; width: 100%;}</style>
+<img alt="Chat Character" id="chat-seahorse" onclick="toggleChatForm()" src="seahorse-chat.png"/>
+<div id="chat-form">
+<label for="chatMessage">Send us a message:</label>
+<textarea id="chatMessage" placeholder="Type your message..."></textarea>
+<button onclick="submitChatMessage()">Send</button>
+</div>
+<script>  function toggleChatForm() {
+    const form = document.getElementById('chat-form');
+    form.style.display = form.style.display === 'block' ? 'none' : 'block';
+  }
+  function submitChatMessage() {
+    const message = document.getElementById('chatMessage').value.trim();
+    if (message) {
+      alert('Message submitted: ' + message);
+      document.getElementById('chatMessage').value = '';
+      document.getElementById('chat-form').style.display = 'none';
+    } else {
+      alert('Please enter a message.');
+    }
+  }</script>
+
+<script>document.addEventListener('DOMContentLoaded', function () {
+  var header = document.querySelector('header');
+  var hamburger = document.querySelector('.hamburger');
+  var navList = document.querySelector('nav ul');
+  var navLinks = document.querySelectorAll('nav a');
+
+  function isMobile() { return window.matchMedia('(max-width: 640px)').matches; }
+  function setMenuTop() {
+    if (!navList || !header) return;
+    var h = header.offsetHeight || 0;
+    navList.style.top = h + 'px';
+  }
+
+  function openMenu() {
+    if (!header) return;
+    header.classList.add('nav-open');
+    setMenuTop();
+  }
+  function closeMenu() {
+    if (!header) return;
+    header.classList.remove('nav-open');
+  }
+  function toggleMenu() {
+    if (!header) return;
+    if (header.classList.contains('nav-open')) { closeMenu(); } else { openMenu(); }
+  }
+
+  if (hamburger) {
+    hamburger.setAttribute('aria-label', 'Toggle navigation');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.addEventListener('click', function () {
+      toggleMenu();
+      hamburger.setAttribute('aria-expanded', header.classList.contains('nav-open') ? 'true' : 'false');
+    });
+  }
+
+  navLinks.forEach(function(a) {
+    a.addEventListener('click', function () {
+      if (isMobile()) { closeMenu(); if (hamburger) hamburger.setAttribute('aria-expanded', 'false'); }
+    });
+  });
+
+  window.addEventListener('resize', function () {
+    if (header && header.classList.contains('nav-open')) { setMenuTop(); }
+  });
+
+  // Initialize menu top on load for safety
+  setMenuTop();
+});</script>
+<script>/* Lazy-load blog.html into #blogContent when the Blog section is opened */
+(function () {
+  var blogLoaded = false;
+
+  function loadBlog() {
+    if (blogLoaded) return;
+    var container = document.getElementById('blogContent');
+    if (!container) return;
+    container.textContent = 'Loading blog…';
+    try {
+      fetch('blog.html', { cache: 'no-store' })
+        .then(function (r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.text();
+        })
+        .then(function (html) {
+          // If blog.html is a full HTML page, try to extract <body> content.
+          var bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+          container.innerHTML = bodyMatch ? bodyMatch[1] : html;
+          blogLoaded = true;
+        })
+        .catch(function (err) {
+          console.error('Blog load failed:', err);
+          container.innerHTML = '<p style="color:#c62828;font-weight:600;">Could not load the blog right now.</p>' +
+                                '<p><a href="blog.html" target="_blank" style="color:#0045a2;">Open blog.html in a new tab</a></p>';
+        });
+    } catch (e) {
+      console.error('Blog load error:', e);
+    }
+  }
+
+  // Wrap existing showSection to ensure blog loads when shown.
+  var originalShowSection = window.showSection;
+  window.showSection = function(id) {
+    if (typeof originalShowSection === 'function') originalShowSection(id);
+    if (id === 'blog') loadBlog();
+  };
+
+  // Handle direct hash loads and manual hash changes.
+  document.addEventListener('DOMContentLoaded', function () {
+    if (location.hash === '#blog') loadBlog();
+    var blogLink = document.querySelector('a[href="#blog"]');
+    if (blogLink) blogLink.addEventListener('click', function () { loadBlog(); }, { once: true });
+  });
+  window.addEventListener('hashchange', function () {
+    if (location.hash === '#blog') loadBlog();
+  });
+})();</script>
+<!-- Gallery lightbox click handler (one-change patch) -->
+<script>(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    var grid = document.querySelector('#gallery .gallery-grid');
+    if (!grid) return;
+    grid.addEventListener('click', function (e) {
+      var img = e.target.closest('.gallery-item img');
+      if (!img) return;
+      if (typeof showLightbox === 'function') {
+        showLightbox(img.src);
+      }
+    });
+  });
+})();</script>
+<script>(function() {
+  function hideAll() {
+    const ids = ['home','products','gallery','about','contact','blog'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    const tri = document.getElementById('tri-circle-products');
+    const stucco = document.getElementById('stucco-products');
+    if (tri) tri.style.display = 'none';
+    if (stucco) stucco.style.display = 'none';
+  }
+
+  function setActive(id) {
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    const link = document.querySelector('nav a[href="#' + id + '"]');
+    if (link) link.classList.add('active');
+  }
+
+  window.showSection = function(id) {
+    hideAll();
+    const el = document.getElementById(id);
+    if (el) el.style.display = (id === 'home') ? 'flex' : 'block';
+    setActive(id);
+    closeMobileMenu();
+  };
+
+  window.showProducts = function() {
+    hideAll();
+    const el = document.getElementById('products');
+    if (el) el.style.display = 'block';
+    setActive('products');
+    closeMobileMenu();
+  };
+
+  window.showTriCircleProducts = function() {
+    hideAll();
+    const el = document.getElementById('tri-circle-products');
+    if (el) el.style.display = 'block';
+    setActive('products');
+    closeMobileMenu();
+  };
+
+  window.showStuccoProducts = function() {
+    hideAll();
+    const el = document.getElementById('stucco-products');
+    if (el) el.style.display = 'block';
+    setActive('products');
+    closeMobileMenu();
+  };
+
+  function headerEl(){ return document.querySelector('header'); }
+  function navList(){ return document.getElementById('primary-nav'); }
+  function burgerBtn(){ return document.querySelector('button.hamburger'); }
+
+  function headerHeight() { const h = headerEl(); return h ? h.offsetHeight : 0; }
+  function positionMobileMenu() {
+    const ul = navList();
+    if (ul) ul.style.top = headerHeight() + 'px';
+  }
+
+  function openMobileMenu() {
+    const h = headerEl(), btn = burgerBtn(), ul = navList();
+    if (!h || !btn || !ul) return;
+    h.classList.add('nav-open');
+    btn.setAttribute('aria-expanded', 'true');
+    positionMobileMenu();
+    const firstLink = ul.querySelector('a');
+    if (firstLink) firstLink.focus();
+    document.addEventListener('keydown', onDocKeydown);
+  }
+
+  function closeMobileMenu(){ var h=document.querySelector("header"); if(!h) return; h.classList.remove("nav-open"); }
+
+  function toggleMobileMenu() {
+    const h = headerEl();
+    if (!h) return;
+    if (h.classList.contains('nav-open')) closeMobileMenu(); else openMobileMenu();
+  }
+
+  function onDocKeydown(e) {
+    if (e.key === 'Escape') {
+      closeMobileMenu();
+      const btn = burgerBtn();
+      if (btn) btn.focus();
+    }
+  }
+
+  function initHamburger() {
+    const btn = burgerBtn();
+    const ul = navList();
+    if (!btn || !ul) return;
+    positionMobileMenu();
+    window.addEventListener('resize', positionMobileMenu);
+    if (!btn.dataset.bound) {
+      btn.addEventListener('click', toggleMobileMenu);
+      ul.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+      btn.dataset.bound = '1';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initHamburger();
+    if (document.getElementById('home')) showSection('home');
+  });
+})();
+
+function setupNavCloseOnce(){
+  if (window.__wcsNavCloseBound) return;
+  window.__wcsNavCloseBound = true;
+  var h=document.querySelector('header');
+  var ul=h? h.querySelector('nav ul'):null;
+  if (!ul) return;
+  ul.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ closeMobileMenu(); }, { once: false });
+    a.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ closeMobileMenu(); } });
+  });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupNavCloseOnce);
+} else {
+  setupNavCloseOnce();
+}
+</script>
+<script id="hero-motion-pref">(function(){
+  function disableAutoplayForReducedMotion(){
+    try {
+      var m = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!m || !m.matches) return;
+      var iframe = document.querySelector('#home iframe');
+      if (!iframe) return;
+      // Replace autoplay=1 with autoplay=0
+      var src = iframe.getAttribute('src') || '';
+      if (!src) return;
+      var url;
+      try { url = new URL(src); }
+      catch(e){ 
+        // Fallback for relative or invalid URLs
+        var a = document.createElement('a'); a.href = src; url = new URL(a.href); 
+      }
+      if (url.searchParams.get('autoplay') !== '0') {
+        url.searchParams.set('autoplay', '0');
+        iframe.setAttribute('src', url.toString());
+      }
+      // Optionally show controls for users to play manually
+      if (url.searchParams.get('controls') === '0') {
+        url.searchParams.set('controls', '1');
+        iframe.setAttribute('src', url.toString());
+      }
+    } catch (e) {
+      // no-op
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', disableAutoplayForReducedMotion);
+  } else {
+    disableAutoplayForReducedMotion();
+  }
+})();</script>
+<script>
+(function(){
+  // Remove duplicate stock badges inside a card, keep the first one only.
+  function dedupeCard(card){
+    if (!card) return;
+    var badges = card.querySelectorAll('.stock-badge');
+    if (badges.length > 1) {
+      for (var i=1; i<badges.length; i++) {
+        if (badges[i] && badges[i].parentNode) badges[i].parentNode.removeChild(badges[i]);
+      }
+    }
+  }
+
+  // Run once on all current cards
+  function runDedupeAll(){
+    document.querySelectorAll('.product-card').forEach(dedupeCard);
+  }
+
+  // Observe future changes from inventory.js rendering
+  var mo = new MutationObserver(function(muts){
+    for (var i=0; i<muts.length; i++){
+      var m = muts[i];
+      // Check added nodes for badges or cards
+      m.addedNodes && m.addedNodes.forEach && m.addedNodes.forEach(function(n){
+        if (!(n instanceof Element)) return;
+        if (n.matches && (n.matches('.stock-badge') || n.matches('.product-card'))) {
+          var card = n.closest ? n.closest('.product-card') : null;
+          dedupeCard(card);
+        } else {
+          // If a subtree was added, find any badges within it
+          n.querySelectorAll && n.querySelectorAll('.product-card').forEach(dedupeCard);
+        }
+      });
+    }
+  });
+
+  // Start observing after DOM is ready
+  function start(){
+    runDedupeAll();
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+</script>
+<!-- Step 18: Performance — lazy-load non-critical images and async decode -->
+<script>
+(function(){
+  try{
+    if (window.__wcsImgPerfInit) return;
+    window.__wcsImgPerfInit = true;
+
+    function isCritical(img){
+      if (img.closest('header')) return true;
+      if (img.hasAttribute('data-priority') && img.getAttribute('data-priority') === 'high') return true;
+      var hero = document.getElementById('home') || document.querySelector('.hero, #hero');
+      if (hero && hero.contains(img)) return true;
+      return false;
+    }
+
+    function tuneImages(){
+      var imgs = document.querySelectorAll('img');
+      imgs.forEach(function(img){
+        if (isCritical(img)){
+          if (!img.hasAttribute('fetchpriority')) img.setAttribute('fetchpriority','high');
+          return;
+        }
+        if (!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+        if (!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
+      });
+    }
+
+    if (document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', tuneImages);
+    } else {
+      tuneImages();
+    }
+  }catch(e){
+    console.error('Step 18 image perf setup error:', e);
+  }
+})();
+</script>
+<script>
+/**
+ * WCS Safe Product Dedupe (idempotent, reversible)
+ * - Canonicalizes Tri-Circle product cards by normalized title text
+ * - Merges duplicate <img> nodes into the primary card
+ * - Hides duplicates with `hidden` (no removal, no renaming)
+ * - Never touches non Tri-Circle sections
+ */
+(function () {
+  var ROOT = document.querySelector('#tri-circle-products .grid-auto');
+  if (!ROOT || ROOT.__wcsDedupeDone) return;
+  ROOT.__wcsDedupeDone = true;
+
+  function keyFromTitle(t) {
+    return (t || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ')
+      .replace(/[^\w\s\-"]+/g, '')
+      .replace(/\s+/g, '-');
+  }
+
+  var cards = Array.prototype.slice.call(ROOT.querySelectorAll('.product-card'));
+  var map = Object.create(null);
+
+  cards.forEach(function(card) {
+    if (card.hasAttribute('data-wcs-duplicate')) return;
+
+    var titleEl = card.querySelector('h3');
+    var key = keyFromTitle(titleEl ? titleEl.textContent : '');
+    if (!key) return;
+
+    if (!map[key]) {
+      map[key] = { primary: card, dups: [] };
+      card.setAttribute('data-wcs-key', key);
+    } else {
+      map[key].dups.push(card);
+      card.setAttribute('data-wcs-key', key);
+    }
+  });
+
+  Object.keys(map).forEach(function(key) {
+    var group = map[key];
+    if (!group || !group.dups.length) return;
+
+    var primary = group.primary;
+    var primaryImgHost = primary;
+    var primaryImgs = primary.querySelectorAll('img');
+    var seenSrc = new Set(Array.prototype.map.call(primaryImgs, function(img){ return img.getAttribute('src'); }));
+
+    group.dups.forEach(function(dup) {
+      Array.prototype.forEach.call(dup.querySelectorAll('img'), function(img) {
+        var src = img.getAttribute('src');
+        if (!src || seenSrc.has(src)) return;
+        var clone = img.cloneNode(true);
+        clone.loading = 'lazy';
+        primaryImgHost.appendChild(clone);
+        seenSrc.add(src);
+      });
+
+      dup.setAttribute('data-wcs-duplicate', 'true');
+      dup.setAttribute('aria-hidden', 'true');
+      dup.hidden = true;
+    });
+  });
+
+  ROOT.querySelectorAll('.product-card').forEach(function(card){
+    var badges = card.querySelectorAll('.stock-badge');
+    if (badges.length > 1) {
+      for (var i = 1; i < badges.length; i++) badges[i].remove();
+    }
+  });
+})();
+</script>
+<script>
+/*! WCS Mobile Nav Controller v1 (idempotent) */
+(function () {
+  if (window.__wcsMobileNavInit) return;
+  window.__wcsMobileNavInit = true;
+
+  var header = document.querySelector('header');
+  var btn = document.querySelector('button.hamburger');
+  var nav = document.getElementById('primary-nav');
+  if (!header || !btn || !nav) return;
+
+  function setMenuTop() {
+    // Ensure the dropdown sits just beneath the fixed header
+    var h = header.getBoundingClientRect().height || header.offsetHeight || 0;
+    nav.style.top = h + 'px';
+  }
+
+  function openMenu() {
+    header.classList.add('nav-open');
+    btn.setAttribute('aria-expanded', 'true');
+    setMenuTop();
+    // prevent background scroll while menu is open on mobile
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    header.classList.remove('nav-open');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  function toggleMenu() {
+    if (header.classList.contains('nav-open')) closeMenu();
+    else openMenu();
+  }
+
+  // Click handlers
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    toggleMenu();
+  }, { passive: false });
+
+  // Close when a nav link is clicked
+  nav.addEventListener('click', function (e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    // Allow hash navigation to proceed, just close the menu
+    closeMenu();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && header.classList.contains('nav-open')) {
+      closeMenu();
+    }
+  });
+
+  // Recompute header height on resize/orientation
+  var resizeTO;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTO);
+    resizeTO = setTimeout(setMenuTop, 100);
+  });
+  window.addEventListener('orientationchange', setMenuTop);
+
+  // Initialize
+  setMenuTop();
+})();
+</script>
+<script>
+/*! WCS Live Search v1 (idempotent, reversible) */
+(function () {
+  if (window.__wcsLiveSearchInit) return;
+  window.__wcsLiveSearchInit = true;
+
+  var input = document.getElementById('searchInput');
+  if (!input) return;
+
+  var targets = [];
+  function collectTargets() {
+    targets = Array.prototype.slice.call(document.querySelectorAll(
+      '#products .product-card, ' +
+      '#tri-circle-products .product-card, ' +
+      '#stucco-products .product-card, ' +
+      '#gallery .gallery-item'
+    ));
+  }
+  collectTargets();
+
+  function normalize(str) {
+    return (str || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  }
+
+  function searchFilter(query) {
+    var q = normalize(query);
+    if (!q) {
+      targets.forEach(function (el) { el.hidden = false; });
+      return;
+    }
+    targets.forEach(function (el) {
+      var text = normalize(el.textContent);
+      el.hidden = text.indexOf(q) === -1;
+    });
+  }
+
+  input.addEventListener('input', function () {
+    searchFilter(this.value);
+  });
+
+  var form = document.getElementById('searchForm');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      searchFilter(input.value);
+    });
+  }
+
+  var observer = new MutationObserver(function () {
+    collectTargets();
+  });
+  var wrapper = document.getElementById('content-wrapper');
+  if (wrapper) observer.observe(wrapper, { childList: true, subtree: true });
+
+})();
+</script>
+<script>
+/*! WCS Lightbox Close/A11y Patch v2 (idempotent) */
+(function () {
+  if (window.__wcsLightboxPatchV2) return;
+  window.__wcsLightboxPatchV2 = true;
+
+  function applyPatch() {
+    // Wrap existing showLightbox to add robust close behavior and scroll lock
+    var orig = window.showLightbox;
+    if (!orig || orig.__wcsWrapped) return;
+    function wrapShowLightbox() {
+      var res = orig.apply(this, arguments);
+      // Defer to allow original to append overlay
+      setTimeout(function () {
+        var overlays = Array.prototype.slice.call(document.querySelectorAll('.lightbox-overlay'));
+        if (!overlays.length) return;
+        // Keep the last (current) overlay, remove extras if any
+        for (var i = 0; i < overlays.length - 1; i++) {
+          overlays[i].parentNode && overlays[i].parentNode.removeChild(overlays[i]);
+        }
+        var overlay = overlays[overlays.length - 1];
+        if (!overlay || overlay.__wcsPatched) return;
+
+        // Lock background scroll
+        var prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+
+        // Close helper
+        function closeOnce() {
+          if (!overlay || !overlay.parentNode) return;
+          overlay.parentNode.removeChild(overlay);
+          document.body.style.overflow = prevOverflow || '';
+          // Reset global guard if present
+          if (window.__wcsLightboxOpen) window.__wcsLightboxOpen = false;
+          // Remove listeners
+          document.removeEventListener('keydown', onKeydown, true);
+        }
+
+        function onKeydown(e) {
+          if (e.key === 'Escape') {
+            e.stopPropagation();
+            e.preventDefault();
+            closeOnce();
+          }
+        }
+
+        // Click to close ONLY when clicking backdrop (single click)
+        overlay.addEventListener('click', function (e) {
+          if (e.target === overlay) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeOnce();
+          }
+        }, { capture: false });
+
+        // Also support touch backdrop tap
+        overlay.addEventListener('touchstart', function (e) {
+          if (e.target === overlay) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeOnce();
+          }
+        }, { passive: false });
+
+        // Prevent image click from bubbling to overlay
+        var img = overlay.querySelector('img');
+        if (img) {
+          img.addEventListener('click', function (e) { e.stopPropagation(); }, { capture: true });
+          img.addEventListener('touchstart', function (e) { e.stopPropagation(); }, { passive: true, capture: true });
+        }
+
+        // Ensure Esc closes
+        document.addEventListener('keydown', onKeydown, true);
+
+        overlay.__wcsPatched = true;
+      }, 0);
+      return res;
+    }
+    wrapShowLightbox.__wcsWrapped = true;
+    window.showLightbox = wrapShowLightbox;
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    applyPatch();
+  } else {
+    document.addEventListener('DOMContentLoaded', applyPatch);
+  }
+})();
+</script>
+<script>
+/*! WCS Contact Form Guard v1 (idempotent, reversible) */
+(function () {
+  if (window.__wcsContactGuardInit) return;
+  window.__wcsContactGuardInit = true;
+
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+
+  // Add useful mobile/input hints without touching markup
+  try {
+    var phone = form.querySelector('input[name="phone"], input[name="biz_phone"]');
+    if (phone) phone.setAttribute('inputmode', 'tel');
+    var email = form.querySelector('input[name="email"], input[name="biz_email"]');
+    if (email) email.setAttribute('inputmode', 'email');
+    var nameEl = form.querySelector('input[name="name"]');
+    if (nameEl) nameEl.setAttribute('autocomplete', 'name');
+    var addr = form.querySelector('input[name="address"], input[name="biz_address"]');
+    if (addr) addr.setAttribute('autocomplete', 'street-address');
+  } catch (e) {}
+
+  // Create an aria-live region for status
+  var live = document.createElement('div');
+  live.setAttribute('aria-live', 'polite');
+  live.setAttribute('aria-atomic', 'true');
+  live.style.position = 'absolute';
+  live.style.left = '-9999px';
+  form.appendChild(live);
+
+  var submitting = false;
+  var submitBtn = form.querySelector('button[type="submit"]');
+
+  function setSubmitting(state) {
+    submitting = state;
+    if (!submitBtn) return;
+    if (state) {
+      submitBtn.setAttribute('data-original-text', submitBtn.textContent);
+      submitBtn.textContent = 'Sending…';
+      submitBtn.disabled = true;
+      live.textContent = 'Submitting your request.';
+    } else {
+      var orig = submitBtn.getAttribute('data-original-text');
+      if (orig) submitBtn.textContent = orig;
+      submitBtn.disabled = false;
+      live.textContent = '';
+    }
+  }
+
+  function focusFirstInvalid() {
+    var firstInvalid = form.querySelector(':invalid');
+    if (firstInvalid) {
+      firstInvalid.focus({ preventScroll: false });
+      try { firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(e) {}
+    }
+  }
+
+  // Ensure only visible group fields are required (business vs homeowner)
+  // (Your existing script handles this on change/DOMContentLoaded; this is a safety net.)
+  function syncGroupRequirements() {
+    var customerTypeSelect = document.getElementById('customerType');
+    var homeownerFields = document.getElementById('homeownerFields');
+    var businessFields = document.getElementById('businessFields');
+    function setRequired(container, required) {
+      if (!container) return;
+      container.querySelectorAll('input, select, textarea').forEach(function(el){
+        if (required) el.removeAttribute('disabled');
+        else el.setAttribute('disabled', '');
+      });
+    }
+    if (customerTypeSelect) {
+      if (customerTypeSelect.value === 'business') {
+        setRequired(homeownerFields, false);
+        setRequired(businessFields, true);
+      } else {
+        setRequired(homeownerFields, true);
+        setRequired(businessFields, false);
+      }
+    }
+  }
+
+  form.addEventListener('submit', function (e) {
+    // Prevent duplicate submits
+    if (submitting) {
+      e.preventDefault();
+      return false;
+    }
+
+    syncGroupRequirements();
+
+    // Client-side validity check
+    if (!form.reportValidity()) {
+      e.preventDefault();
+      focusFirstInvalid();
+      return false;
+    }
+
+    // Optional: stamp subject with timestamp for easier triage
+    try {
+      var subj = form.querySelector('input[name="_subject"]');
+      if (subj) {
+        var ts = new Date().toISOString().replace('T',' ').replace('Z','');
+        subj.value = (subj.value || 'Website Quote Request') + ' • ' + ts;
+      }
+    } catch (e) {}
+
+    setSubmitting(true);
+    // Let the native submission proceed (navigates to formsubmit Thank You/redirect)
+  }, { passive: false });
+
+  // In case user navigates back (history), reset state
+  window.addEventListener('pageshow', function() { setSubmitting(false); });
+})();
+</script>
+<script>
+/*! WCS Blog Loader v2 (idempotent, resilient) */
+(function () {
+  if (window.__wcsBlogLoaderInit) return;
+  window.__wcsBlogLoaderInit = true;
+
+  var container = document.getElementById('blog-container');
+  if (!container) return;
+
+  var BLOG_URL = 'blog.html';
+  var MAX_RETRIES = 1;
+  var RETRY_DELAY = 1500; // ms
+
+  // Initial loading placeholder
+  container.innerHTML = '<div class="blog-loading" style="padding:1em;text-align:center;font-style:italic;">Loading blog posts…</div>';
+
+  function fetchBlog(retryCount) {
+    fetch(BLOG_URL, { cache: 'no-cache' })
+      .then(function (response) {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.text();
+      })
+      .then(function (htmlText) {
+        container.innerHTML = htmlText;
+      })
+      .catch(function (err) {
+        console.warn('Blog fetch error:', err);
+        if (retryCount < MAX_RETRIES) {
+          setTimeout(function () {
+            fetchBlog(retryCount + 1);
+          }, RETRY_DELAY);
+        } else {
+          container.innerHTML = '<div class="blog-error" style="padding:1em;text-align:center;color:red;">Unable to load blog posts. Please <a href="#" onclick="location.reload();return false;">refresh</a> to try again.</div>';
+        }
+      });
+  }
+
+  fetchBlog(0);
+})();
+</script>
+<script>
+/*! WCS Image Lazy Boost v1 (idempotent, reversible) */
+(function () {
+  if (window.__wcsLazyBoostInit) return;
+  window.__wcsLazyBoostInit = true;
+
+  // Critical images to keep eager
+  function isCritical(img) {
+    if (!img) return false;
+    if (img.classList.contains('logo')) return true;
+    // Keep any image inside the fixed header eager
+    var p = img;
+    while (p) { if (p.tagName === 'HEADER') return true; p = p.parentElement; }
+    return false;
+  }
+
+  var imgs = Array.prototype.slice.call(document.images || []);
+  imgs.forEach(function(img){
+    // Skip if already set or critical
+    if (isCritical(img)) return;
+
+    // Apply lazy-loading where not explicitly set
+    if (!img.hasAttribute('loading')) {
+      img.setAttribute('loading', 'lazy');
+    }
+    // Async decode helps browsers schedule work better
+    if (!img.hasAttribute('decoding')) {
+      img.setAttribute('decoding', 'async');
+    }
+
+    // Lightweight error handler to avoid broken UI if a URL 404s
+    if (!img.__wcsErrorBound) {
+      img.addEventListener('error', function(){
+        // Hide obviously broken assets without changing layout drastically
+        // Only hide if there is at least one sibling <img> or text present
+        try {
+          var siblings = (img.parentElement && img.parentElement.querySelectorAll('img').length) || 0;
+          if (siblings > 1) { img.style.display = 'none'; }
+          img.alt = img.alt || 'Image unavailable';
+        } catch(e) {}
+      }, { once: true });
+      img.__wcsErrorBound = true;
+    }
+  });
+
+  // Observe future DOM changes (e.g., blog loader)
+  var observer = new MutationObserver(function(mutations){
+    mutations.forEach(function(m){
+      Array.prototype.slice.call(m.addedNodes || []).forEach(function(node){
+        if (node && node.tagName === 'IMG') imgs.push(node);
+        if (node && node.querySelectorAll) {
+          Array.prototype.slice.call(node.querySelectorAll('img')).forEach(function(i){ imgs.push(i); });
+        }
+      });
+    });
+    // Re-run lazification for any new images
+    imgs.forEach(function(img){
+      if (isCritical(img)) return;
+      if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+      if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+    });
+  });
+  observer.observe(document.getElementById('content-wrapper') || document.body, { childList: true, subtree: true });
+})();
+</script>
+<script>
+/*! WCS Hash Nav Helper v1 (idempotent, reversible) */
+(function(){
+  if (window.__wcsHashNavInit) return;
+  window.__wcsHashNavInit = true;
+
+  var header = document.querySelector('header');
+
+  function safeCall(fnName, fallbackId){
+    var fn = window[fnName];
+    if (typeof fn === 'function') {
+      try { fn(); return true; } catch(e) {}
+    }
+    if (fallbackId) {
+      try { showSection(fallbackId); return true; } catch(e) {}
+      var el = document.getElementById(fallbackId);
+      if (el) {
+        // Basic section show fallback: hide siblings, show this
+        try {
+          var sections = document.querySelectorAll('section[id]');
+          sections.forEach(function(s){ s.style.display = (s.id === fallbackId ? '' : 'none'); });
+        } catch(e) {}
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function scrollToTopOfContent(){
+    try {
+      var topOffset = (header && (header.getBoundingClientRect().height || header.offsetHeight)) || 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch(e) {}
+  }
+
+  function handleHash(rawHash){
+    var hash = (rawHash || location.hash || '').trim();
+    if (hash && hash.charAt(0) === '#') hash = hash.slice(1);
+
+    if (!hash) { // default to home
+      safeCall(null, 'home');
+      return;
+    }
+
+    switch (hash) {
+      case 'products':
+        if (!safeCall('showProducts', 'products')) safeCall(null, 'products');
+        break;
+      case 'tri-circle-products':
+        if (!safeCall('showTriCircleProducts', 'tri-circle-products')) safeCall(null, 'tri-circle-products');
+        break;
+      case 'stucco-products':
+        if (!safeCall('showStuccoProducts', 'stucco-products')) safeCall(null, 'stucco-products');
+        break;
+      case 'gallery':
+      case 'about':
+      case 'contact':
+      case 'blog':
+      case 'home':
+        safeCall(null, hash);
+        break;
+      default:
+        // Unknown hash: try to show a section with that id if present
+        safeCall(null, hash);
+        break;
+    }
+
+    // Close mobile nav if open
+    try {
+      var btn = document.querySelector('button.hamburger');
+      var hdr = document.querySelector('header');
+      if (hdr && hdr.classList.contains('nav-open')) {
+        btn && btn.setAttribute('aria-expanded','false');
+        hdr.classList.remove('nav-open');
+        document.body.style.overflow = '';
+      }
+    } catch(e) {}
+
+    scrollToTopOfContent();
+  }
+
+  // On initial load
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    handleHash(location.hash);
+  } else {
+    document.addEventListener('DOMContentLoaded', function(){ handleHash(location.hash); });
+  }
+
+  // On hash changes
+  window.addEventListener('hashchange', function(){ handleHash(location.hash); });
+})();
+</script>
+<script>
+/*! WCS Reduced Motion Hero v1 (idempotent) */
+(function(){
+  if (window.__wcsReducedMotionInit) return;
+  window.__wcsReducedMotionInit = true;
+  try {
+    var mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!mq || !mq.matches) return;
+    var home = document.getElementById('home');
+    if (!home) return;
+    var iframe = home.querySelector('iframe');
+    if (!iframe) return;
+    var src = iframe.getAttribute('src') || '';
+    // Turn off autoplay when reduced motion is requested
+    if (/autoplay=1/.test(src)) {
+      src = src.replace('autoplay=1','autoplay=0');
+      iframe.setAttribute('src', src);
+    }
+  } catch(e){}
+})();
+</script>
+<script>
+/*! WCS Alt Text Guard v1 (idempotent, non-visual) */
+(function(){
+  if (window.__wcsAltGuardInit) return;
+  window.__wcsAltGuardInit = true;
+  function humanizeFileName(url){
+    try {
+      var name = (url || '').split('/').pop().split('?')[0].split('#')[0];
+      name = name.replace(/[-_]+/g,' ').replace(/\.[a-z0-9]+$/i,'');
+      return name.trim();
+    } catch(e){ return 'Image'; }
+  }
+  function bestContext(el){
+    var p = el;
+    while (p && p !== document.body){
+      var h = p.querySelector && p.querySelector('h3,h4,h2');
+      if (h && h.textContent) return h.textContent.trim();
+      p = p.parentElement;
+    }
+    return '';
+  }
+  Array.prototype.forEach.call(document.images || [], function(img){
+    var alt = img.getAttribute('alt');
+    if (alt && alt.trim()) return;
+    var context = bestContext(img);
+    var fallback = context || humanizeFileName(img.getAttribute('src')) || 'Image';
+    img.setAttribute('alt', fallback);
+  });
+})();
+</script>
+<script>
+/*! WCS Product Schema v1 (idempotent, SEO only) */
+(function(){
+  if (window.__wcsSchemaInit) return;
+  window.__wcsSchemaInit = true;
+  try{
+    var root = document.querySelector('#tri-circle-products .grid-auto');
+    if (!root) return;
+    var cards = Array.prototype.slice.call(root.querySelectorAll('.product-card'));
+    if (!cards.length) return;
+    var items = cards.map(function(card, idx){
+      var nameEl = card.querySelector('h3');
+      var name = nameEl ? nameEl.textContent.trim() : 'Paver';
+      var imgEl = card.querySelector('img');
+      var img = imgEl ? imgEl.getAttribute('src') : null;
+      return {
+        "@type": "Product",
+        "name": name,
+        "image": img ? [img] : undefined,
+        "brand": { "@type": "Brand", "name": "Tri Circle" }
+      };
+    }).slice(0, 20); // cap to 20 to keep payload small
+    var ld = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": items.map(function(p, i){
+        return { "@type": "ListItem", "position": i+1, "item": p };
+      })
+    };
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.text = JSON.stringify(ld);
+    document.head.appendChild(s);
+  }catch(e){}
+})();
+</script>
+</body></html>
