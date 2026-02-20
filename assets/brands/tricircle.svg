@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="120" viewBox="0 0 560 120">
+  <rect width="560" height="120" rx="22" fill="rgba(255,255,255,0.02)"/>
+  <text x="280" y="72" text-anchor="middle"
+        font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial"
+        font-size="34" font-weight="900" fill="rgba(233,237,246,0.86)">Tri Circle</text>
+</svg>
